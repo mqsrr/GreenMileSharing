@@ -1,0 +1,91 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
+             xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+             xmlns:icons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GreenMileSharing.Client.Views.CreateNewTripUserControl"
+             x:DataType="viewModels:CreateNewTripViewModel"
+             FontFamily="{StaticResource Montserrat-Regular}"
+             Classes="NakedWindow">
+
+    <Design.DataContext>
+        <viewModels:CreateNewTripViewModel />
+    </Design.DataContext>
+
+    <Grid ShowGridLines="False"
+          RowDefinitions="Auto,*"
+          ColumnDefinitions="*,*">
+        <controls:GlassCard Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="20">
+            <StackPanel Spacing="10">
+                <TextBox Text="{Binding CreateTripRequest.StartMileage, Mode=OneWayToSource}"
+                         Watermark="Start Mileage" UseFloatingWatermark="True"/>
+                <TextBox Text="{Binding CreateTripRequest.EndMileage, Mode=OneWayToSource}" 
+                         Watermark="End Mileage" UseFloatingWatermark="True"/>
+                <Button Classes="Flat Rounded" Content="Register new Trip"/>
+            </StackPanel>
+        </controls:GlassCard>
+        <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                 ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar, Mode=OneWayToSource}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Classes="Card" Width="240" Height="240" DoubleTapped="OpenCarDetailsView">
+                        <Grid ShowGridLines="False"
+                              ColumnDefinitions="Auto,*, Auto"
+                              RowDefinitions="Auto,Auto,*">
+                            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                                    ClipToBounds="True" Width="200" Height="150" Classes="Card">
+                                <Viewbox Width="200" Height="200" Stretch="Uniform">
+                                    <Image Source="avares://GreenMileSharing.Client/Assets/car.jpeg" />
+                                </Viewbox>
+                            </Border>
+
+                            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Content="{Binding CarBrand}" />
+
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="{Binding Model}" />
+
+                            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                    CornerRadius="7" ClipToBounds="True">
+                                <Label HorizontalAlignment="Center" Padding="10 0"
+                                       Content="{Binding CurrentMileage}" FontWeight="Medium">
+                                    <Label.Background>
+                                        <SolidColorBrush Color="PaleGreen" Opacity="0.1" />
+                                    </Label.Background>
+                                    <Label.Foreground>
+                                        <SolidColorBrush Color="Green" Opacity="0.6" />
+                                    </Label.Foreground>
+                                </Label>
+                            </Border>
+                            <Border Grid.Row="2" Grid.Column="0"
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                    CornerRadius="7" ClipToBounds="True">
+                                <Label HorizontalAlignment="Center" Padding="10 0"
+                                       Content="{Binding EndOfLifeMileage}" FontWeight="Medium">
+                                    <Label.Background>
+                                        <SolidColorBrush Color="IndianRed" Opacity="0.1" />
+                                    </Label.Background>
+                                    <Label.Foreground>
+                                        <SolidColorBrush Color="Red" Opacity="0.6" />
+                                    </Label.Foreground>
+                                </Label>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

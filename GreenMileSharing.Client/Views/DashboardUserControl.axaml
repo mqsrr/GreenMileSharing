@@ -1,0 +1,105 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
+             xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+             xmlns:converters="clr-namespace:GreenMileSharing.Client.Converters"
+             xmlns:theme="clr-namespace:SukiUI.Theme;assembly=SukiUI"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GreenMileSharing.Client.Views.DashboardUserControl"
+             FontFamily="{StaticResource Montserrat-Regular}"
+             x:DataType="viewModels:DashboardViewModel">
+
+    <Design.DataContext>
+        <viewModels:DashboardViewModel />
+    </Design.DataContext>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ImageBytesToBitMap x:Key="ImageBytesToBitMap" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid ShowGridLines="False"
+          RowDefinitions="Auto,Auto,Auto,Auto,*"
+          ColumnDefinitions="Auto,Auto,*" Margin="10">
+        <Label Grid.Row="0" Grid.Column="0" Padding="20"
+               Content="{Binding Employee.Username, StringFormat='Welcome, {0}!'}" FontSize="40" FontWeight="SemiBold" />
+
+        <Label Grid.Row="1" Grid.Column="0" Padding="20 0 0 0"
+               Content="We are presenting a great amount of cars to satisfy your trip!" FontSize="20"
+               FontWeight="Medium" />
+
+        <TextBox Grid.Row="2" Grid.Column="0"
+                 Margin="20 10 0 0" UseFloatingWatermark="True" Watermark="Search Car Brand or Licence Plate"
+                 theme:TextBoxExtensions.AddDeleteButton="True" Width="300" HorizontalAlignment="Left" 
+                 TextChanged="OnSearchTextChanged"/>
+        
+        <ScrollViewer Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="10 20 0 0">
+            <ItemsControl ItemsSource="{Binding Cars}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ShowGridLines="False"
+                              ColumnDefinitions="Auto,*,*"
+                              RowDefinitions="Auto,Auto,*" Margin="5">
+                            <controls:GlassCard Width="240" Height="240" DoubleTapped="OpenCarDetailsView">
+                                <Grid ShowGridLines="False"
+                                      ColumnDefinitions="Auto,*, Auto"
+                                      RowDefinitions="Auto,Auto,*">
+                                    <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                                            HorizontalAlignment="Center" VerticalAlignment="Top"
+                                            ClipToBounds="True" Width="200" Height="150" Classes="Card">
+                                        <Viewbox Width="200" Height="200" Stretch="Uniform">
+                                            <Image Source="avares://GreenMileSharing.Client/Assets/car.jpeg" />
+                                        </Viewbox>
+                                    </Border>
+                                    
+                                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Content="{Binding CarBrand}" />
+
+                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Content="{Binding Model}" />
+                                    
+                                    <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                            CornerRadius="7" ClipToBounds="True">
+                                        <Label HorizontalAlignment="Center" Padding="10 0"
+                                            Content="{Binding CurrentMileage}" FontWeight="Medium">
+                                            <Label.Background>
+                                                <SolidColorBrush Color="PaleGreen" Opacity="0.1" />
+                                            </Label.Background>
+                                            <Label.Foreground>
+                                                <SolidColorBrush Color="Green" Opacity="0.6" />
+                                            </Label.Foreground>
+                                        </Label>
+                                    </Border>                                   
+                                    <Border Grid.Row="2" Grid.Column="0" 
+                                            VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                            CornerRadius="7" ClipToBounds="True">
+                                        <Label HorizontalAlignment="Center" Padding="10 0"
+                                            Content="{Binding EndOfLifeMileage}" FontWeight="Medium">
+                                            <Label.Background>
+                                                <SolidColorBrush Color="IndianRed" Opacity="0.1" />
+                                            </Label.Background>
+                                            <Label.Foreground>
+                                                <SolidColorBrush Color="Red" Opacity="0.6" />
+                                            </Label.Foreground>
+                                        </Label>
+                                    </Border>
+                                </Grid>
+                            </controls:GlassCard>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

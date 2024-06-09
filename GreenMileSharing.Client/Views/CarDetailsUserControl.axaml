@@ -1,0 +1,97 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="200"
+             x:Class="GreenMileSharing.Client.Views.CarDetailsUserControl"
+             x:DataType="viewModels:CarDetailsViewModel"
+             FontFamily="{StaticResource Montserrat-Regular}"
+             FontWeight="Medium"
+             FontSize="13">
+    <Design.DataContext>
+        <viewModels:CarDetailsViewModel />
+    </Design.DataContext>
+    
+    <Grid ShowGridLines="False"
+          ColumnDefinitions="Auto,Auto"
+          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" Margin="10"
+          HorizontalAlignment="Left" VerticalAlignment="Center">
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="6"
+                HorizontalAlignment="Left" VerticalAlignment="Center"
+                ClipToBounds="True" Width="200" Height="150" Classes="Card">
+            <Viewbox Width="200" Height="200" Stretch="Uniform">
+                <Image Source="avares://GreenMileSharing.Client/Assets/car.jpeg" />
+            </Viewbox>
+        </Border>
+        
+        <Label Grid.Row="0" Grid.Column="1"
+               VerticalAlignment="Center"
+               Content="{Binding Car.CarBrand, StringFormat='Brand: {0}'}"/>        
+        
+        <Label Grid.Row="1" Grid.Column="1"
+               VerticalAlignment="Center"
+               Content="{Binding Car.LicensePlateNumber, StringFormat='License Plate Number: {0}'}"/>
+        
+        <Label Grid.Row="2" Grid.Column="1"
+               VerticalAlignment="Center"
+               Content="{Binding Car.Model, StringFormat='Model: {0}'}" />
+        
+        <StackPanel Grid.Row="3" Grid.Column="1"
+                    Orientation="Horizontal">
+            <Label 
+                VerticalAlignment="Center" HorizontalAlignment="Left"
+                Content="Maintenance Interval:" />        
+        
+            <Border Height="24" CornerRadius="7"
+                    ClipToBounds="True">
+                <Label HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                       Content="{Binding Car.MaintenanceInterval}">
+                    <Label.Background>
+                        <SolidColorBrush Color="Orange" Opacity="0.1" />
+                    </Label.Background>
+                    <Label.Foreground>
+                        <SolidColorBrush Color="DarkOrange" Opacity="0.6" />
+                    </Label.Foreground>
+                </Label>
+            </Border>          
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+            <Label 
+                VerticalAlignment="Center" HorizontalAlignment="Left"
+                Content="End Of Life Mileage:" />        
+        
+            <Border Height="24"
+                    CornerRadius="7" ClipToBounds="True">
+                <Label HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                       Content="{Binding Car.EndOfLifeMileage}">
+                    <Label.Background>
+                        <SolidColorBrush Color="IndianRed" Opacity="0.1" />
+                    </Label.Background>
+                    <Label.Foreground>
+                        <SolidColorBrush Color="Red" Opacity="0.6" />
+                    </Label.Foreground>
+                </Label>
+            </Border>          
+        </StackPanel>        
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+            <Label 
+                VerticalAlignment="Center" HorizontalAlignment="Left"
+                Content="Current Mileage:" />        
+        
+            <Border Height="24"
+                    CornerRadius="7" ClipToBounds="True">
+                <Label HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                       Content="{Binding Car.CurrentMileage}">
+                    <Label.Background>
+                        <SolidColorBrush Color="LightGreen" Opacity="0.1" />
+                    </Label.Background>
+                    <Label.Foreground>
+                        <SolidColorBrush Color="Green" Opacity="0.6" />
+                    </Label.Foreground>
+                </Label>
+            </Border>          
+        </StackPanel>
+    </Grid>
+    
+</UserControl>

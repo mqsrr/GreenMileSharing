@@ -1,0 +1,48 @@
+<controls:SukiWindow xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GreenMileSharing.Client.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+        xmlns:heroIcons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
+        xmlns:views="clr-namespace:GreenMileSharing.Client.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="GreenMileSharing.Client.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Client"
+        Classes="NakedWindow">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <controls:SukiSideMenu  controls:SukiHost.ToastLimit="4" controls:SukiHost.ToastLocation="BottomLeft">
+        <controls:SukiSideMenu.HeaderContent>
+            <StackPanel Orientation="Horizontal" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <heroIcons:HeroIcon Type="LightBulb" Margin="10 0" 
+                                    PointerPressed="OnThemeChangeClick" Min="True"/>
+                <heroIcons:HeroIcon Type="Sparkles" Margin="10 0"
+                                    PointerPressed="OnPrimaryColorChangeClick" Min="True"/>
+            </StackPanel>
+        </controls:SukiSideMenu.HeaderContent>
+        <controls:SukiSideMenu.Items>
+            <controls:SukiSideMenuItem Header="DashBoard">
+                <controls:SukiSideMenuItem.Icon>
+                    <heroIcons:HeroIcon Type="ComputerDesktop" Min="True"/>
+                </controls:SukiSideMenuItem.Icon>
+                <controls:SukiSideMenuItem.PageContent>
+                    <views:DashboardUserControl/>
+                </controls:SukiSideMenuItem.PageContent>
+            </controls:SukiSideMenuItem>            
+            <controls:SukiSideMenuItem Header="Trips">
+                <controls:SukiSideMenuItem.Icon>
+                    <heroIcons:HeroIcon Type="Truck" Min="True"/>
+                </controls:SukiSideMenuItem.Icon>
+                <controls:SukiSideMenuItem.PageContent>
+                    <views:TripsUserControl/>
+                </controls:SukiSideMenuItem.PageContent>
+            </controls:SukiSideMenuItem>
+        </controls:SukiSideMenu.Items>
+    </controls:SukiSideMenu>
+</controls:SukiWindow>

@@ -1,0 +1,85 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
+             xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+             xmlns:heroIcons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400"
+             x:Class="GreenMileSharing.Client.Views.TripsUserControl"
+             FontFamily="{StaticResource Montserrat-Regular}"
+             x:DataType="viewModels:TripsViewModel">
+
+    <Design.DataContext>
+        <viewModels:TripsViewModel />
+    </Design.DataContext>
+
+    <Grid ShowGridLines="False"
+          RowDefinitions="Auto,Auto,*"
+          ColumnDefinitions="Auto,*" Margin="10">
+        <Label Grid.Column="0" Grid.Row="0"
+               Content="Register your trips!" FontSize="30" FontWeight="DemiBold" />
+
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                Classes="Flat Rounded" Padding="10" Margin="10"
+                Content="Create new trip" Command="{Binding OpenCreateNewTripDialogCommand}"/>
+
+        <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <ItemsControl
+                ItemsSource="{Binding Trips}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:GlassCard Width="250" Height="200" Margin="5">
+                            <Grid ShowGridLines="False"
+                                  ColumnDefinitions="Auto,Auto,Auto"
+                                  RowDefinitions="Auto,Auto">
+                                <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        ClipToBounds="True" Width="190" Height="140" Classes="Card">
+                                    <Viewbox Width="200" Height="200" Stretch="Uniform">
+                                        <Image Source="avares://GreenMileSharing.Client/Assets/car.jpeg" />
+                                    </Viewbox>
+                                </Border>
+                                
+                                <Border Grid.Row="1" Grid.Column="0" Margin="0 5"
+                                        CornerRadius="7" ClipToBounds="True">
+                                    <Label HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10 0"
+                                           Content="{Binding StartMileage}" FontWeight="Medium">
+                                        <Label.Background>
+                                            <SolidColorBrush Color="Orange" Opacity="0.1" />
+                                        </Label.Background>
+                                        <Label.Foreground>
+                                            <SolidColorBrush Color="DarkOrange" Opacity="0.6" />
+                                        </Label.Foreground>
+                                    </Label>
+                                </Border>        
+
+                                <heroIcons:HeroIcon Grid.Row="1" Grid.Column="1"
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Type="ArrowRight" Height="10" />
+                                
+                                <Border Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                        CornerRadius="7" ClipToBounds="True">
+                                    <Label HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10 0"
+                                           Content="{Binding EndMileage}" FontWeight="Medium">
+                                        <Label.Background>
+                                            <SolidColorBrush Color="PaleGreen" Opacity="0.1" />
+                                        </Label.Background>
+                                        <Label.Foreground>
+                                            <SolidColorBrush Color="Green" Opacity="0.6" />
+                                        </Label.Foreground>
+                                    </Label>
+                                </Border> 
+                            </Grid>
+                        </controls:GlassCard>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

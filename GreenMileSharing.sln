@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.TripApi", "GreenMileSharing.TripApi\GreenMileSharing.TripApi.csproj", "{AA5CA395-2085-44BF-8176-314685422005}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8BAAC408-6517-4EAC-A799-285DE52C2C67}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Domain", "GreenMileSharing.Domain\GreenMileSharing.Domain.csproj", "{8C90980E-218B-454D-9253-0904433D088D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.IdentityApi", "GreenMileSharing.IdentityApi\GreenMileSharing.IdentityApi.csproj", "{05B41562-FCF0-43F9-B2B4-EFE637F6A751}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.EmailService", "GreenMileSharing.EmailService\GreenMileSharing.EmailService.csproj", "{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Shared", "GreenMileSharing.Shared\GreenMileSharing.Shared.csproj", "{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Messages", "GreenMileSharing.Messages\GreenMileSharing.Messages.csproj", "{A3D00789-6985-4FFC-8007-C8104D1813FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Client", "GreenMileSharing.Client\GreenMileSharing.Client.csproj", "{BD2A852C-715D-47C7-8237-1DAF39FB933B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA5CA395-2085-44BF-8176-314685422005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA5CA395-2085-44BF-8176-314685422005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA5CA395-2085-44BF-8176-314685422005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA5CA395-2085-44BF-8176-314685422005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C90980E-218B-454D-9253-0904433D088D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C90980E-218B-454D-9253-0904433D088D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C90980E-218B-454D-9253-0904433D088D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C90980E-218B-454D-9253-0904433D088D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05B41562-FCF0-43F9-B2B4-EFE637F6A751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05B41562-FCF0-43F9-B2B4-EFE637F6A751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05B41562-FCF0-43F9-B2B4-EFE637F6A751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05B41562-FCF0-43F9-B2B4-EFE637F6A751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D00789-6985-4FFC-8007-C8104D1813FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D00789-6985-4FFC-8007-C8104D1813FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D00789-6985-4FFC-8007-C8104D1813FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D00789-6985-4FFC-8007-C8104D1813FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2A852C-715D-47C7-8237-1DAF39FB933B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2A852C-715D-47C7-8237-1DAF39FB933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2A852C-715D-47C7-8237-1DAF39FB933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2A852C-715D-47C7-8237-1DAF39FB933B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
