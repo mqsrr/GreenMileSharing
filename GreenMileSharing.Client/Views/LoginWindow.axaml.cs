@@ -34,7 +34,7 @@ internal partial class LoginWindow : SukiWindow
 
     private void OnClosingRegisterView(object? o, WindowClosingEventArgs args)
     {
-        ((Window)o!).Hide();
+        ((SukiWindow)o!).Hide();
         args.Cancel = true;
         Show();
     }

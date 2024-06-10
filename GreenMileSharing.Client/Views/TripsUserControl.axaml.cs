@@ -9,6 +9,6 @@ public partial class TripsUserControl : UserControl
     public TripsUserControl()
     {
         InitializeComponent();
-        DataContext = new TripsViewModel();
+        DataContext = App.Services.GetRequiredService<TripsViewModel>();
     }
 }

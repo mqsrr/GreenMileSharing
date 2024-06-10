@@ -13,7 +13,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddIniFile("../env.ini");
+builder.Configuration.AddIniFile("env.ini");
 builder.Host.UseSerilog((_, configuration) =>
     configuration.ReadFrom.Configuration(builder.Configuration));
 
@@ -26,11 +26,12 @@ builder.Services.AddApplicationService<ITripRepository>();
 builder.Services.AddApplicationService<IEmployeeRepository>();
 
 builder.Services.AddApplicationService<ICarRepository>();
-builder.Services.AddOptionsWithValidateOnStart<RabbitMqSettings>()
-    .Bind(builder.Configuration.GetRequiredSection(RabbitMqSettings.SectionName));
 
 builder.Services.AddFluentValidationAutoValidation()
-    .AddValidatorsFromAssemblyContaining<IValidatorsMarker>(includeInternalTypes: true);
+    .AddValidatorsFromAssemblyContaining<IValidatorsMarker>(ServiceLifetime.Singleton, includeInternalTypes: true);
+
+builder.Services.AddOptionsWithValidateOnStart<RabbitMqSettings>()
+    .Bind(builder.Configuration.GetRequiredSection(RabbitMqSettings.SectionName));
 
 builder.Services.AddMassTransit(busConfigurator =>
 {
@@ -45,15 +46,15 @@ builder.Services.AddMassTransit(busConfigurator =>
             hostConfigurator.Username(rabbitMqSettings.Username);
             hostConfigurator.Password(rabbitMqSettings.Password);
         });
-
+        
         configurator.UseNewtonsoftJsonSerializer();
         configurator.UseNewtonsoftJsonDeserializer();
-
+        
         configurator.ConfigureEndpoints(context);
         
         EndpointConvention.Map<DeleteEmployee>(new Uri("queue:delete-employee"));
         EndpointConvention.Map<UpdateUsername>(new Uri("queue:update-username"));
-    });
+    }); 
 });
 
 var app = builder.Build();

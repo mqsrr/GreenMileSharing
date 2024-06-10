@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace GreenMileSharing.Client.HttpHandlers;
 
-internal sealed class ApiKeyMessageHandler : DelegatingHandler
+internal sealed class ApiKeyAuthorizationMessageHandler : DelegatingHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {

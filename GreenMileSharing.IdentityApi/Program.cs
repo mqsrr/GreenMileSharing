@@ -12,7 +12,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddIniFile("../env.ini");
+builder.Configuration.AddIniFile("env.ini");
 builder.Host.UseSerilog((_, configuration) =>
     configuration.ReadFrom.Configuration(builder.Configuration));
 
@@ -30,7 +30,6 @@ builder.Services.AddOptionsWithValidateOnStart<JwtSettings>()
 builder.Services.AddOptionsWithValidateOnStart<RabbitMqSettings>()
     .Bind(builder.Configuration.GetRequiredSection(RabbitMqSettings.SectionName));
 
-
 builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.SetKebabCaseEndpointNameFormatter();
@@ -46,11 +45,12 @@ builder.Services.AddMassTransit(busConfigurator =>
             hostConfigurator.Username(rabbitMqSettings.Username);
             hostConfigurator.Password(rabbitMqSettings.Password);
         });
-
+        
+        configurator.ConfigureEndpoints(context);
+        
         configurator.UseNewtonsoftJsonSerializer();
         configurator.UseNewtonsoftJsonDeserializer();
-
-        configurator.ConfigureEndpoints(context);
+        
         EndpointConvention.Map<RegisterEmployee>(new Uri("queue:register-employee"));
     });
 });

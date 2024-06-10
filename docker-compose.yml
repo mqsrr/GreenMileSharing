@@ -1,22 +1,4 @@
 ﻿services:
-  greenmilesharing.api:
-    image: greenmilesharing.api
-    build:
-      context: .
-      dockerfile: GreenMileSharing.API/Dockerfile
-
-  greenmilesharing.identityapi:
-    image: greenmilesharing.identityapi
-    build:
-      context: .
-      dockerfile: GreenMileSharing.IdentityApi/Dockerfile
-
-  greenmilesharing.emailservice:
-    image: greenmilesharing.emailservice
-    build:
-      context: .
-      dockerfile: GreenMileSharing.EmailService/Dockerfile
-      
   rabbitmq:
     image: rabbitmq:3.12.14-management-alpine
     ports:

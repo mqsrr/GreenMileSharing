@@ -71,7 +71,7 @@
                                     <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                             VerticalAlignment="Bottom" HorizontalAlignment="Right"
                                             CornerRadius="7" ClipToBounds="True">
-                                        <Label HorizontalAlignment="Center" Padding="10 0"
+                                        <Label HorizontalAlignment="Center" Padding="10 2"
                                             Content="{Binding CurrentMileage}" FontWeight="Medium">
                                             <Label.Background>
                                                 <SolidColorBrush Color="PaleGreen" Opacity="0.1" />
@@ -84,13 +84,13 @@
                                     <Border Grid.Row="2" Grid.Column="0" 
                                             VerticalAlignment="Bottom" HorizontalAlignment="Left"
                                             CornerRadius="7" ClipToBounds="True">
-                                        <Label HorizontalAlignment="Center" Padding="10 0"
+                                        <Label HorizontalAlignment="Center" Padding="10 2"
                                             Content="{Binding EndOfLifeMileage}" FontWeight="Medium">
                                             <Label.Background>
                                                 <SolidColorBrush Color="IndianRed" Opacity="0.1" />
                                             </Label.Background>
                                             <Label.Foreground>
-                                                <SolidColorBrush Color="Red" Opacity="0.6" />
+                                                <SolidColorBrush Color="Brown" Opacity="0.6" />
                                             </Label.Foreground>
                                         </Label>
                                     </Border>

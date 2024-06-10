@@ -16,26 +16,24 @@
         <viewModels:LoginViewModel />
     </Design.DataContext>
 
-    <controls:GlassCard Width="300" Height="350" Margin="10">
+    <controls:GlassCard Width="350" Height="350" Margin="10">
         <Grid ShowGridLines="False"
               ColumnDefinitions="Auto,*,Auto"
               RowDefinitions="Auto,Auto,Auto,Auto,*"
               Margin="10">
-
-            <heroIcons:HeroIcon Grid.Row="0" Grid.Column="1" Type="FaceSmile" />
-
-            <TextBlock Grid.Row="1" Grid.Column="1"
+            
+            <TextBlock Grid.Row="0" Grid.Column="1"
                        Text="Login" Classes="h2" HorizontalAlignment="Center" />
 
-            <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"
+            <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="5"
                      Text="{Binding LoginRequest.UserName, Mode=OneWayToSource}" Watermark="Username"
-                     HorizontalAlignment="Center" Width="200" />
+                     HorizontalAlignment="Left" Width="250" UseFloatingWatermark="True"/>
 
-            <TextBox Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="5"
+            <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="5"
                      Text="{Binding LoginRequest.Password, Mode=OneWayToSource}" Watermark="Password"
-                     HorizontalAlignment="Center" Width="200" PasswordChar="*" />
+                     HorizontalAlignment="Left" Width="250" PasswordChar="*"  UseFloatingWatermark="True"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="1"
+            <TextBlock Grid.Row="3" Grid.Column="1"
                        Text="Register new account" HorizontalAlignment="Center" Foreground="SlateGray"
                        PointerPressed="MoveToRegisterWindow" />
 

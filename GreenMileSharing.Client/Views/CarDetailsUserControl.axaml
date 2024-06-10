@@ -69,7 +69,7 @@
                         <SolidColorBrush Color="IndianRed" Opacity="0.1" />
                     </Label.Background>
                     <Label.Foreground>
-                        <SolidColorBrush Color="Red" Opacity="0.6" />
+                        <SolidColorBrush Color="Brown" Opacity="0.6" />
                     </Label.Foreground>
                 </Label>
             </Border>          

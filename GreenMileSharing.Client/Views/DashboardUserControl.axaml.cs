@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -43,5 +44,10 @@ public partial class DashboardUserControl : UserControl
         var carDetails = new CarDetailsUserControl(tappedCar!);
 
         SukiHost.ShowDialog(carDetails, allowBackgroundClose: true);
+    }
+    
+    protected override async void OnInitialized()
+    {
+        await _dashboardViewModel.InitializeAsync().ConfigureAwait(false);
     }
 }

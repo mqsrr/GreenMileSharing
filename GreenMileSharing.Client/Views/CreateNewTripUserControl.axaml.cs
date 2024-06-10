@@ -1,4 +1,7 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Avalonia.Controls;
 using Avalonia.Input;
 using GreenMileSharing.Client.Models;
 using GreenMileSharing.Client.ViewModels;
@@ -9,6 +12,7 @@ namespace GreenMileSharing.Client.Views;
 
 public partial class CreateNewTripUserControl : UserControl
 {
+    
     public CreateNewTripUserControl()
     {
         InitializeComponent();

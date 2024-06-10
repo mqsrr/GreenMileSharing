@@ -6,7 +6,6 @@ using GreenMileSharing.Client.Contracts.Trips;
 using GreenMileSharing.Client.Helpers;
 using GreenMileSharing.Client.Models;
 using GreenMileSharing.Client.Views;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using SukiUI.Controls;
 
@@ -19,21 +18,10 @@ internal sealed partial class TripsViewModel : ViewModelBase
 
     [ObservableProperty]
     private IEnumerable<Trip> _trips;
-    
-    private readonly Employee _employee;
 
-    public TripsViewModel(IMemoryCache memoryCache)
-    {
-        CreateTripRequest = new CreateTripRequest();
-        _employee = memoryCache.Get<Employee>(CacheKeys.Employee)!;
-        Trips = _employee.Trips ?? [];
-    }
-    
     public TripsViewModel()
     {
         CreateTripRequest = new CreateTripRequest();
-
-        _employee = null!;
         Trips = AutoFaker.Generate<Trip>(10);
     }
 
@@ -41,7 +29,6 @@ internal sealed partial class TripsViewModel : ViewModelBase
     private void OpenCreateNewTripDialog()
     {
         var createNewTripUserControl = App.Services.GetRequiredService<CreateNewTripUserControl>();
-
         SukiHost.ShowDialog(createNewTripUserControl, allowBackgroundClose:true);
     }
 }

@@ -9,12 +9,10 @@ namespace GreenMileSharing.Client.HttpHandlers;
 
 internal sealed class BearerAuthorizationMessageHandler(IMemoryCache memoryCache) : DelegatingHandler
 {
-    private readonly IMemoryCache _memoryCache = memoryCache;
-
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _memoryCache.Get<string>(CacheKeys.JwtToken));
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", StaticStorage.Token);
         return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
 }

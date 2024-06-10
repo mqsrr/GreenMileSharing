@@ -8,7 +8,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400"
              x:Class="GreenMileSharing.Client.Views.TripsUserControl"
              FontFamily="{StaticResource Montserrat-Regular}"
-             x:DataType="viewModels:TripsViewModel">
+             x:DataType="viewModels:TripsViewModel"
+             Margin="10">
 
     <Design.DataContext>
         <viewModels:TripsViewModel />
@@ -17,7 +18,7 @@
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,Auto,*"
           ColumnDefinitions="Auto,*" Margin="10">
-        <Label Grid.Column="0" Grid.Row="0"
+        <Label Grid.Column="0" Grid.Row="0" Margin="10"
                Content="Register your trips!" FontSize="30" FontWeight="DemiBold" />
 
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
@@ -46,7 +47,7 @@
                                     </Viewbox>
                                 </Border>
                                 
-                                <Border Grid.Row="1" Grid.Column="0" Margin="0 5"
+                                <Border Grid.Row="1" Grid.Column="0" Margin="0 10"
                                         CornerRadius="7" ClipToBounds="True">
                                     <Label HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10 0"
                                            Content="{Binding StartMileage}" FontWeight="Medium">
@@ -61,11 +62,11 @@
 
                                 <heroIcons:HeroIcon Grid.Row="1" Grid.Column="1"
                                                     HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                    Type="ArrowRight" Height="10" />
+                                                    Type="ArrowRight" Height="10" Kind="Outline"/>
                                 
-                                <Border Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                <Border Grid.Row="1" Grid.Column="2" Margin="0 10"
                                         CornerRadius="7" ClipToBounds="True">
-                                    <Label HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10 0"
+                                    <Label HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                            Content="{Binding EndMileage}" FontWeight="Medium">
                                         <Label.Background>
                                             <SolidColorBrush Color="PaleGreen" Opacity="0.1" />

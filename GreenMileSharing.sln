@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Messages",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Client", "GreenMileSharing.Client\GreenMileSharing.Client.csproj", "{BD2A852C-715D-47C7-8237-1DAF39FB933B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.ApiGateway", "GreenMileSharing.ApiGateway\GreenMileSharing.ApiGateway.csproj", "{09910341-56DF-4639-BF1A-4E218320597C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +55,9 @@ Global
 		{BD2A852C-715D-47C7-8237-1DAF39FB933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD2A852C-715D-47C7-8237-1DAF39FB933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD2A852C-715D-47C7-8237-1DAF39FB933B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09910341-56DF-4639-BF1A-4E218320597C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09910341-56DF-4639-BF1A-4E218320597C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09910341-56DF-4639-BF1A-4E218320597C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09910341-56DF-4639-BF1A-4E218320597C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
