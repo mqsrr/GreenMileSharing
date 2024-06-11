@@ -15,13 +15,14 @@ namespace GreenMileSharing.TripApi.Persistence.Migrations
                 name: "Cars",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    LicensePlateNumber = table.Column<string>(type: "character varying(125)", unicode: false, maxLength: 125, nullable: false),
-                    CarBrand = table.Column<string>(type: "character varying(125)", unicode: false, maxLength: 125, nullable: false),
-                    Model = table.Column<string>(type: "character varying(125)", unicode: false, maxLength: 125, nullable: false),
-                    EndOfLifeMileage = table.Column<int>(type: "integer", unicode: false, nullable: false),
-                    MaintenanceInterval = table.Column<int>(type: "integer", nullable: false),
-                    CurrentMileage = table.Column<int>(type: "integer", unicode: false, nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    LicensePlateNumber = table.Column<string>(type: "varchar(125)", unicode: false, maxLength: 125, nullable: false),
+                    CarBrand = table.Column<string>(type: "varchar(125)", unicode: false, maxLength: 125, nullable: false),
+                    Model = table.Column<string>(type: "varchar(125)", unicode: false, maxLength: 125, nullable: false),
+                    EndOfLifeMileage = table.Column<int>(type: "int", unicode: false, nullable: false),
+                    MaintenanceInterval = table.Column<int>(type: "int", nullable: false),
+                    CurrentMileage = table.Column<int>(type: "int", unicode: false, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,8 +33,8 @@ namespace GreenMileSharing.TripApi.Persistence.Migrations
                 name: "Employees",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Username = table.Column<string>(type: "character varying(255)", unicode: false, maxLength: 255, nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Username = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,11 +45,11 @@ namespace GreenMileSharing.TripApi.Persistence.Migrations
                 name: "Trips",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    EmployeeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CarId = table.Column<Guid>(type: "uuid", nullable: false),
-                    StartMileage = table.Column<int>(type: "integer", unicode: false, nullable: false),
-                    EndMileage = table.Column<int>(type: "integer", unicode: false, nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CarId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StartMileage = table.Column<int>(type: "int", unicode: false, nullable: false),
+                    EndMileage = table.Column<int>(type: "int", unicode: false, nullable: false)
                 },
                 constraints: table =>
                 {

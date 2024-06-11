@@ -11,6 +11,11 @@ internal sealed class ImageBytesToBitMap : IValueConverter
 
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
+        if (value is null)
+        {
+            return null;
+        }
+        
         var bitmap = new Bitmap(new MemoryStream((value as byte[])!));   
         return bitmap;
     }

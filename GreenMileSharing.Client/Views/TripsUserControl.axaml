@@ -5,6 +5,7 @@
              xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
              xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
              xmlns:heroIcons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
+             xmlns:converters="clr-namespace:GreenMileSharing.Client.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400"
              x:Class="GreenMileSharing.Client.Views.TripsUserControl"
              FontFamily="{StaticResource Montserrat-Regular}"
@@ -14,6 +15,12 @@
     <Design.DataContext>
         <viewModels:TripsViewModel />
     </Design.DataContext>
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ImageBytesToBitMap x:Key="ImageBytesToBitMap" />
+        </ResourceDictionary>
+    </UserControl.Resources>
 
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,Auto,*"
@@ -43,7 +50,7 @@
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
                                         ClipToBounds="True" Width="190" Height="140" Classes="Card">
                                     <Viewbox Width="200" Height="200" Stretch="Uniform">
-                                        <Image Source="avares://GreenMileSharing.Client/Assets/car.jpeg" />
+                                        <Image Source="{Binding Car.Image, Converter={StaticResource ImageBytesToBitMap}}" />
                                     </Viewbox>
                                 </Border>
                                 

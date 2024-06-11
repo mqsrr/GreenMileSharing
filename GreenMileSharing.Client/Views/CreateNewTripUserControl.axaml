@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
              xmlns:theme="clr-namespace:SukiUI.Theme;assembly=SukiUI"
+             xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+             xmlns:converters="clr-namespace:GreenMileSharing.Client.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GreenMileSharing.Client.Views.CreateNewTripUserControl"
              x:DataType="viewModels:CreateNewTripViewModel"
@@ -13,7 +15,13 @@
     <Design.DataContext>
         <viewModels:CreateNewTripViewModel />
     </Design.DataContext>
-
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ImageBytesToBitMap x:Key="ImageBytesToBitMap" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*"
           ColumnDefinitions="*,*">
@@ -23,7 +31,10 @@
                          Watermark="Start Mileage" UseFloatingWatermark="True"/>
                 <TextBox Text="{Binding CreateTripRequest.EndMileage, Mode=OneWayToSource}" 
                          Watermark="End Mileage" UseFloatingWatermark="True"/>
-                <Button Classes="Flat Rounded" Content="Register new Trip"/>
+                <controls:BusyArea IsBusy="{Binding CreateTripCommand.IsRunning}">
+                    <Button Classes="Flat Rounded" Content="Register New Trip"
+                            Command="{Binding CreateTripCommand}"/>
+                </controls:BusyArea>
             </StackPanel>
         </Border>
         <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20"
@@ -43,7 +54,7 @@
                                     HorizontalAlignment="Center" VerticalAlignment="Top"
                                     ClipToBounds="True" Width="200" Height="150" Classes="Card">
                                 <Viewbox Width="200" Height="200" Stretch="Uniform">
-                                    <Image Source="avares://GreenMileSharing.Client/Assets/car.jpeg" />
+                                    <Image Source="{Binding Image, Converter={StaticResource ImageBytesToBitMap}}" />
                                 </Viewbox>
                             </Border>
 

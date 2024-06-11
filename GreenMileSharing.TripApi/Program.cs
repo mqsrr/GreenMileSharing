@@ -14,13 +14,14 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddIniFile("env.ini");
+
 builder.Host.UseSerilog((_, configuration) =>
     configuration.ReadFrom.Configuration(builder.Configuration));
 
 builder.Configuration.AddJwtBearer(builder);
 
 builder.Services.AddControllers();
-builder.Services.AddNpgsql<TripDbContext>(builder.Configuration["TripsDb:ConnectionString"]);
+builder.Services.AddSqlServer<TripDbContext>(builder.Configuration["TripsDb:ConnectionString"]);
 
 builder.Services.AddApplicationService<ITripRepository>();
 builder.Services.AddApplicationService<IEmployeeRepository>();

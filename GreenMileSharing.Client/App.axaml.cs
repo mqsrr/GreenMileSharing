@@ -27,7 +27,6 @@ public partial class App : Application
 
         services.RegisterViewModels();
         services.RegisterViews();
-        services.AddMemoryCache();
         
         services.AddTransient<BearerAuthorizationMessageHandler>();
         services.AddTransient<ApiKeyAuthorizationMessageHandler>();
@@ -38,11 +37,10 @@ public partial class App : Application
             .AddWebApiClient<ITripsWebApi>();
         
         Services = services.BuildServiceProvider(true);
-        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.ShutdownMode = ShutdownMode.OnLastWindowClose;
-            desktop.MainWindow = new LoginWindow();
+            desktop.MainWindow = new MainWindow();
         }
         
         base.OnFrameworkInitializationCompleted();

@@ -1,18 +1,19 @@
-﻿namespace GreenMileSharing.Client.Contracts.Cars;
+﻿
+namespace GreenMileSharing.Client.Contracts.Cars;
 
 internal sealed class CreateCarRequest
 {
-    public required byte[] Image { get; init; }
-    
-    public required string LicensePlateNumber { get; init; }
+    public byte[] Image { get; set; } = null!;
 
-    public required string CarBrand { get; init; }
+    public string LicensePlateNumber { get; set; } = null!;
 
-    public required string Model { get; init; }
+    public string CarBrand { get; set; } = null!;
 
-    public required int EndOfLifeMileage { get; init; }
+    public string Model { get; set; } = null!;
 
-    public required int MaintenanceInterval { get; init; }
+    public string EndOfLifeMileage { get; set; } = null!;
 
-    public required int CurrentMileage { get; init; }
+    public string MaintenanceInterval { get; set; } = null!;
+
+    public string CurrentMileage { get; set; } = null!;
 }

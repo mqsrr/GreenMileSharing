@@ -21,7 +21,7 @@ builder.Configuration.AddJwtBearer(builder);
 builder.Services.AddApplicationService<IAuthService<ApplicationUser>>();
 builder.Services.AddApplicationService<ITokenWriter<ApplicationUser>>();
 
-builder.Services.AddNpgsql<ApplicationDbContext>(builder.Configuration["IdentityDb:ConnectionString"]);
+builder.Services.AddSqlServer<ApplicationDbContext>(builder.Configuration["IdentityDb:ConnectionString"]);
 builder.Services.AddIdentityConfiguration();
 
 builder.Services.AddOptionsWithValidateOnStart<JwtSettings>()

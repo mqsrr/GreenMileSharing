@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using GreenMileSharing.Client.Contracts.Trips;
 using GreenMileSharing.Client.Helpers;
@@ -11,7 +12,7 @@ namespace GreenMileSharing.Client.RefitClients;
 internal interface ITripsWebApi
 {
     [Post(ApiEndpoints.Trip.Create)]
-    Task<IApiResponse<Trip>> CreateAsync([Body] CreateTripRequest request);
+    Task<IApiResponse<Trip>> CreateAsync([Body] CreateTripRequest request, CancellationToken cancellationToken);
 
     [Delete(ApiEndpoints.Trip.DeleteById)]
     Task<IApiResponse> DeleteByIdAsync(Guid id);

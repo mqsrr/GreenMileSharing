@@ -3,16 +3,16 @@ using System;
 using GreenMileSharing.TripApi.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace GreenMileSharing.TripApi.Persistence.Migrations
 {
     [DbContext(typeof(TripDbContext))]
-    [Migration("20240603195857_Initial")]
+    [Migration("20240611081834_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -21,44 +21,48 @@ namespace GreenMileSharing.TripApi.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.6")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("GreenMileSharing.Domain.Car", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CarBrand")
                         .IsRequired()
                         .HasMaxLength(125)
                         .IsUnicode(false)
-                        .HasColumnType("character varying(125)");
+                        .HasColumnType("varchar(125)");
 
                     b.Property<int>("CurrentMileage")
                         .IsUnicode(false)
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("EndOfLifeMileage")
                         .IsUnicode(false)
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("LicensePlateNumber")
                         .IsRequired()
                         .HasMaxLength(125)
                         .IsUnicode(false)
-                        .HasColumnType("character varying(125)");
+                        .HasColumnType("varchar(125)");
 
                     b.Property<int>("MaintenanceInterval")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasMaxLength(125)
                         .IsUnicode(false)
-                        .HasColumnType("character varying(125)");
+                        .HasColumnType("varchar(125)");
 
                     b.HasKey("Id");
 
@@ -75,13 +79,13 @@ namespace GreenMileSharing.TripApi.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(255)
                         .IsUnicode(false)
-                        .HasColumnType("character varying(255)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -95,21 +99,21 @@ namespace GreenMileSharing.TripApi.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CarId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("EndMileage")
                         .IsUnicode(false)
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("StartMileage")
                         .IsUnicode(false)
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -125,21 +129,17 @@ namespace GreenMileSharing.TripApi.Persistence.Migrations
 
             modelBuilder.Entity("GreenMileSharing.Domain.Trip", b =>
                 {
-                    b.HasOne("GreenMileSharing.Domain.Car", "Car")
+                    b.HasOne("GreenMileSharing.Domain.Car", null)
                         .WithMany("Trips")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GreenMileSharing.Domain.Employee", "Employee")
+                    b.HasOne("GreenMileSharing.Domain.Employee", null)
                         .WithMany("Trips")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("GreenMileSharing.Domain.Car", b =>

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trips-api
+  labels:
+    app: trips-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trips-api
+  template:
+    metadata:
+      name: trips-api
+      labels:
+        app: trips-api
+    spec:
+      containers:
+        - name: trips-api
+          image: mqsr/greenmile-trips-api:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
+      restartPolicy: Always
+      
