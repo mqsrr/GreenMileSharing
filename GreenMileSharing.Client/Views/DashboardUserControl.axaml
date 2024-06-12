@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
              xmlns:converters="clr-namespace:GreenMileSharing.Client.Converters"
              xmlns:theme="clr-namespace:SukiUI.Theme;assembly=SukiUI"
+             xmlns:icons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="GreenMileSharing.Client.Views.DashboardUserControl"
              FontFamily="{StaticResource Montserrat-Regular}"
@@ -23,7 +24,7 @@
 
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,Auto,Auto,Auto,*"
-          ColumnDefinitions="Auto,Auto,*" Margin="10">
+          ColumnDefinitions="Auto,*" Margin="10">
         <Label Grid.Row="0" Grid.Column="0" Padding="20"
                Content="{Binding Employee.Username, StringFormat='Welcome, {0}!'}" FontSize="40" FontWeight="SemiBold" />
 
@@ -36,10 +37,11 @@
                  theme:TextBoxExtensions.AddDeleteButton="True" Width="300" HorizontalAlignment="Left" 
                  TextChanged="OnSearchTextChanged"/>
         
-        <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="10"
-                Classes="Flat Rounded" Content="Add Car" Command="{Binding OpenCreateCarUserControlCommand}"/>
+        <Button Grid.Row="2" Grid.Column="1" Margin="10"
+                Classes="Flat Rounded" HorizontalAlignment="Left" 
+                Command="{Binding OpenCreateCarUserControlCommand}" Content="Add Car"/>
         
-        <ScrollViewer Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="10 20 0 0">
+        <ScrollViewer Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 20 0 0">
             <ItemsControl ItemsSource="{Binding Cars}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -58,7 +60,7 @@
                                     <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                                             HorizontalAlignment="Center" VerticalAlignment="Top"
                                             ClipToBounds="True" Width="200" Height="150" Classes="Card">
-                                        <Viewbox Width="200" Height="200" Stretch="Uniform">
+                                        <Viewbox Width="200" Height="150" Stretch="UniformToFill" >
                                             <Image Source="{Binding Image, Converter={StaticResource ImageBytesToBitMap}}" />
                                         </Viewbox>
                                     </Border>

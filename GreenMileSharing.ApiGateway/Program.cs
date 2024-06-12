@@ -10,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .AddIniFile("env.ini")
     .AddJsonFile("ocelot.json", false, true)
-    .AddJsonFile("ocelot-production.json", false, true)
     .AddJwtBearer(builder);
 
 builder.Services

@@ -3,7 +3,7 @@ using Avalonia.Markup.Xaml.Templates;
 
 namespace GreenMileSharing.Client.Models;
 
-internal sealed class Trip
+public sealed class Trip
 {
     public required Guid Id { get; init; }
 

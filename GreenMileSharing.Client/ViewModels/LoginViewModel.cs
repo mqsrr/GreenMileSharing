@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -20,17 +21,20 @@ internal partial class LoginViewModel : ViewModelBase
 
     private readonly IIdentityWebApi _identityWebApi;
     private readonly IEmployeesWebApi _employeesWebApi;
+    private readonly ICarsWebApi _carsWebApi;
     
-    public LoginViewModel(IIdentityWebApi identityWebApi, IEmployeesWebApi employeesWebApi)
+    public LoginViewModel(IIdentityWebApi identityWebApi, IEmployeesWebApi employeesWebApi, ICarsWebApi carsWebApi)
     {
         _identityWebApi = identityWebApi;
         _employeesWebApi = employeesWebApi;
+        _carsWebApi = carsWebApi;
 
         LoginRequest = new LoginRequest();
     }
     
     public LoginViewModel()
     {
+        _carsWebApi = null!;
         _employeesWebApi = null!;
         _identityWebApi = null!;
         
@@ -53,7 +57,9 @@ internal partial class LoginViewModel : ViewModelBase
         StaticStorage.Token = authResponse.Content!.Token;
         
         var loggedInEmployeeResponse = await _employeesWebApi.GetByUsernameAsync(LoginRequest.UserName, cancellationToken);
-        if (!loggedInEmployeeResponse.IsSuccessStatusCode)
+        var carsResponse = await _carsWebApi.GetAllAsync(cancellationToken);
+        
+        if (!loggedInEmployeeResponse.IsSuccessStatusCode || !carsResponse.IsSuccessStatusCode)
         {
             await SukiHost.ShowToast("Unexpected Error", 
                 "We have encountered unexpected error. Please wait until it resolves and try again.",
@@ -63,6 +69,8 @@ internal partial class LoginViewModel : ViewModelBase
         }
 
         StaticStorage.Employee = loggedInEmployeeResponse.Content!;
+        StaticStorage.Cars = carsResponse.Content!.ToList();
+        
         MoveToMainDashBoard();
     }
 

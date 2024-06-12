@@ -28,36 +28,36 @@
         <Border Grid.Column="0" Grid.Row="0"
                 HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"
                 ClipToBounds="True" Width="200" Height="150" Classes="Card">
-            <Viewbox Width="200" Height="200" Stretch="Uniform">
+            <Viewbox Width="200" Height="150" Stretch="Uniform">
                 <Image Source="{Binding CarImage, Converter={StaticResource ImageBytesToBitMap}}" />
             </Viewbox>
         </Border>
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <TextBox
                 VerticalAlignment="Center" Text="{Binding Request.CarBrand}"
-                Watermark="Car Brand" UseFloatingWatermark="True" />
+                Watermark="Car Brand" UseFloatingWatermark="True"/>
 
             <TextBox
                 VerticalAlignment="Center" Text="{Binding Request.LicensePlateNumber}"
-                Watermark="License Plate Number" UseFloatingWatermark="True" />
+                Watermark="License Plate Number" UseFloatingWatermark="True"/>
 
             <TextBox
                 VerticalAlignment="Center" Text="{Binding Request.Model}"
-                Watermark="Model" UseFloatingWatermark="True" />            
+                Watermark="Model" UseFloatingWatermark="True"/>            
 
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center">
             <TextBox
-                VerticalAlignment="Center" Text="{Binding Request.CurrentMileage, Mode=OneWayToSource, Converter={StaticResource StringToIntConverter}}"
+                VerticalAlignment="Center" Text="{Binding Request.CurrentMileage}"
                 Watermark="Current Mileage" UseFloatingWatermark="True"/>
             
             <TextBox
-                VerticalAlignment="Center" Text="{Binding Request.MaintenanceInterval, Mode=OneWayToSource, Converter={StaticResource StringToIntConverter}}"
+                VerticalAlignment="Center" Text="{Binding Request.MaintenanceInterval}"
                 Watermark="Maintenance Interval" UseFloatingWatermark="True"/>
             
             <TextBox
-                VerticalAlignment="Center" Text="{Binding Request.EndOfLifeMileage, Mode=OneWayToSource, Converter={StaticResource StringToIntConverter}}"
-                Watermark="End Of Life Mileage" UseFloatingWatermark="True" />
+                VerticalAlignment="Center" Text="{Binding Request.EndOfLifeMileage}"
+                Watermark="End Of Life Mileage" UseFloatingWatermark="True"/>
         </StackPanel>
         <Button Grid.Row="1" Grid.Column="0"  Margin="10"
                 Classes="Flat Rounded" Content="Change photo"

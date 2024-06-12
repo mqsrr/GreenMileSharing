@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoBogus;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -17,18 +18,26 @@ internal sealed partial class TripsViewModel : ViewModelBase
     private CreateTripRequest _createTripRequest;
 
     [ObservableProperty]
-    private IEnumerable<Trip> _trips;
+    private List<Trip> _trips;
 
     public TripsViewModel()
     {
         CreateTripRequest = new CreateTripRequest();
-        Trips = AutoFaker.Generate<Trip>(10);
+        Trips = StaticStorage.Employee.Trips?
+            .Select(trip =>
+            {
+                var tripCar = StaticStorage.Cars.FirstOrDefault(car => car.Id == trip.CarId);
+                trip.Car = tripCar;
+                
+                return trip;
+            }).ToList() ?? [];
+
     }
 
     [RelayCommand]
     private void OpenCreateNewTripDialog()
     {
         var createNewTripUserControl = App.Services.GetRequiredService<CreateNewTripUserControl>();
-        SukiHost.ShowDialog(createNewTripUserControl, allowBackgroundClose:true);
+        SukiHost.ShowDialog(createNewTripUserControl, allowBackgroundClose: true);
     }
 }

@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using GreenMileSharing.Client.Extensions;
 using GreenMileSharing.Client.HttpHandlers;
@@ -23,11 +24,14 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        BindingPlugins.DataValidators.RemoveAt(0);
+
         var services = new ServiceCollection();
 
         services.RegisterViewModels();
         services.RegisterViews();
         
+        services.AddMediator();
         services.AddTransient<BearerAuthorizationMessageHandler>();
         services.AddTransient<ApiKeyAuthorizationMessageHandler>();
         
@@ -36,11 +40,11 @@ public partial class App : Application
             .AddWebApiClient<ICarsWebApi>()
             .AddWebApiClient<ITripsWebApi>();
         
-        Services = services.BuildServiceProvider(true);
+        Services = services.BuildServiceProvider();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.ShutdownMode = ShutdownMode.OnLastWindowClose;
-            desktop.MainWindow = new MainWindow();
+            desktop.MainWindow = new LoginWindow();
         }
         
         base.OnFrameworkInitializationCompleted();

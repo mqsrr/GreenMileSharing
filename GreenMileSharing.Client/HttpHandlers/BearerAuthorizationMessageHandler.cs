@@ -7,7 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace GreenMileSharing.Client.HttpHandlers;
 
-internal sealed class BearerAuthorizationMessageHandler(IMemoryCache memoryCache) : DelegatingHandler
+internal sealed class BearerAuthorizationMessageHandler() : DelegatingHandler
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {

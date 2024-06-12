@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
+             xmlns:converters="clr-namespace:GreenMileSharing.Client.Converters"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="200"
              x:Class="GreenMileSharing.Client.Views.CarDetailsUserControl"
              x:DataType="viewModels:CarDetailsViewModel"
@@ -13,6 +14,13 @@
         <viewModels:CarDetailsViewModel />
     </Design.DataContext>
     
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ImageBytesToBitMap x:Key="ImageBytesToBitMap" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <Grid ShowGridLines="False"
           ColumnDefinitions="Auto,Auto"
           RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" Margin="10"
@@ -20,8 +28,8 @@
         <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="6"
                 HorizontalAlignment="Left" VerticalAlignment="Center"
                 ClipToBounds="True" Width="200" Height="150" Classes="Card">
-            <Viewbox Width="200" Height="200" Stretch="Uniform">
-                <Image Source="avares://GreenMileSharing.Client/Assets/car.jpeg" />
+            <Viewbox Width="200" Height="150" Stretch="UniformToFill">
+                <Image Source="{Binding Car.Image, Converter={StaticResource ImageBytesToBitMap}}" />
             </Viewbox>
         </Border>
         

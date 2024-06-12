@@ -23,7 +23,7 @@ internal static partial class CarMapper
     {
         using var memoryStream = new MemoryStream();
         using var image = Image.Load(file.OpenReadStream());
-
+        
         image.Save(memoryStream, image.DetectEncoder(file.FileName));
         return memoryStream.ToArray();
     }

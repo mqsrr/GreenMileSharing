@@ -9,5 +9,5 @@ internal sealed class Employee
 
     public required string Username { get; init; }
 
-    public IEnumerable<Trip>? Trips { get; init; }
+    public ICollection<Trip>? Trips { get; init; }
 }

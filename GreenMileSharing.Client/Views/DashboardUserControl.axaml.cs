@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
+using DynamicData;
 using GreenMileSharing.Client.Models;
 using GreenMileSharing.Client.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,20 +23,26 @@ public partial class DashboardUserControl : UserControl
     {
         InitializeComponent();
         _dashboardViewModel = App.Services.GetRequiredService<DashboardViewModel>();
-        _cars = _dashboardViewModel.Cars;
-
+        
         DataContext = _dashboardViewModel;
+        _cars = _dashboardViewModel.Cars;
     }
 
     public void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
     {
         var textBox = sender as TextBox;
         string textBoxText = textBox!.Text!;
-
-        _dashboardViewModel.Cars = _cars;
-        _dashboardViewModel.Cars = _dashboardViewModel.Cars.Where(car =>
+        if (string.IsNullOrEmpty(textBoxText))
+        {
+            _dashboardViewModel.Cars.Clear();
+            _dashboardViewModel.Cars.AddRange(_cars);
+            
+            return;
+        }
+        
+        _dashboardViewModel.Cars = new ObservableCollection<Car>(_cars.Where(car =>
             car.CarBrand.Contains(textBoxText, StringComparison.OrdinalIgnoreCase)
-            || car.LicensePlateNumber.Contains(textBoxText, StringComparison.OrdinalIgnoreCase));
+            || car.LicensePlateNumber.Contains(textBoxText, StringComparison.OrdinalIgnoreCase)));
     }
 
     private void OpenCarDetailsView(object? sender, TappedEventArgs e)
@@ -43,10 +52,5 @@ public partial class DashboardUserControl : UserControl
         var carDetails = new CarDetailsUserControl(tappedCar!);
 
         SukiHost.ShowDialog(carDetails, allowBackgroundClose: true);
-    }
-    
-    protected override async void OnInitialized()
-    {
-        await _dashboardViewModel.InitializeAsync().ConfigureAwait(false);
     }
 }

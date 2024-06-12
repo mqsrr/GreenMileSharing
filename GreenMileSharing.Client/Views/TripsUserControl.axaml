@@ -15,7 +15,7 @@
     <Design.DataContext>
         <viewModels:TripsViewModel />
     </Design.DataContext>
-    
+
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:ImageBytesToBitMap x:Key="ImageBytesToBitMap" />
@@ -30,11 +30,10 @@
 
         <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                 Classes="Flat Rounded" Padding="10" Margin="10"
-                Content="Create new trip" Command="{Binding OpenCreateNewTripDialogCommand}"/>
+                Content="Create new trip" Command="{Binding OpenCreateNewTripDialogCommand}" />
 
         <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <ItemsControl
-                ItemsSource="{Binding Trips}">
+            <ItemsControl ItemsSource="{Binding Trips}" Margin="10">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -42,37 +41,21 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:GlassCard Width="250" Height="200" Margin="5">
+                        <controls:GlassCard Width="240" Height="160" Margin="5">
                             <Grid ShowGridLines="False"
-                                  ColumnDefinitions="Auto,Auto,Auto"
-                                  RowDefinitions="Auto,Auto">
+                                  ColumnDefinitions="Auto, *, Auto"
+                                  RowDefinitions="Auto, Auto, *">
                                 <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
-                                        HorizontalAlignment="Center" VerticalAlignment="Center"
-                                        ClipToBounds="True" Width="190" Height="140" Classes="Card">
-                                    <Viewbox Width="200" Height="200" Stretch="Uniform">
-                                        <Image Source="{Binding Car.Image, Converter={StaticResource ImageBytesToBitMap}}" />
+                                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                                        ClipToBounds="True" Width="200" Height="100" Classes="Card">
+                                    <Viewbox Width="200" Height="150" Stretch="UniformToFill">
+                                        <Image
+                                            Source="{Binding Car.Image, Converter={StaticResource ImageBytesToBitMap}}" />
                                     </Viewbox>
                                 </Border>
-                                
-                                <Border Grid.Row="1" Grid.Column="0" Margin="0 10"
-                                        CornerRadius="7" ClipToBounds="True">
-                                    <Label HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="10 0"
-                                           Content="{Binding StartMileage}" FontWeight="Medium">
-                                        <Label.Background>
-                                            <SolidColorBrush Color="Orange" Opacity="0.1" />
-                                        </Label.Background>
-                                        <Label.Foreground>
-                                            <SolidColorBrush Color="DarkOrange" Opacity="0.6" />
-                                        </Label.Foreground>
-                                    </Label>
-                                </Border>        
 
-                                <heroIcons:HeroIcon Grid.Row="1" Grid.Column="1"
-                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                    Type="ArrowRight" Height="10" Kind="Outline"/>
-                                
-                                <Border Grid.Row="1" Grid.Column="2" Margin="0 10"
-                                        CornerRadius="7" ClipToBounds="True">
+                                <Border Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom"
+                                        CornerRadius="7" ClipToBounds="True" Margin="5">
                                     <Label HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                            Content="{Binding EndMileage}" FontWeight="Medium">
                                         <Label.Background>
@@ -82,7 +65,25 @@
                                             <SolidColorBrush Color="Green" Opacity="0.6" />
                                         </Label.Foreground>
                                     </Label>
-                                </Border> 
+                                </Border>
+
+                                <heroIcons:HeroIcon Grid.Row="1" Grid.Column="1"
+                                                    Type="ArrowRight" Min="True"
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Height="10" />
+
+                                <Border Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom"
+                                        CornerRadius="7" ClipToBounds="True" Margin="5">
+                                    <Label HorizontalAlignment="Center" VerticalContentAlignment="Center"
+                                           Content="{Binding StartMileage}" FontWeight="Medium">
+                                        <Label.Background>
+                                            <SolidColorBrush Color="IndianRed" Opacity="0.1" />
+                                        </Label.Background>
+                                        <Label.Foreground>
+                                            <SolidColorBrush Color="Brown" Opacity="0.6" />
+                                        </Label.Foreground>
+                                    </Label>
+                                </Border>
                             </Grid>
                         </controls:GlassCard>
                     </DataTemplate>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using GreenMileSharing.Client.Contracts.Cars;
@@ -15,6 +16,14 @@ internal interface ICarsWebApi
     [Get(ApiEndpoints.Car.GetAll)]
     Task<IApiResponse<IEnumerable<Car>>> GetAllAsync(CancellationToken cancellationToken);
     
-    [Post(ApiEndpoints.Car.Create)]
-    Task<IApiResponse<Car>> CreateAsync([Body(BodySerializationMethod.UrlEncoded)] CreateCarRequest request, CancellationToken cancellationToken);
+    [Multipart]
+    [Post(ApiEndpoints.Car.GetAll)]
+    Task<IApiResponse<Car>> CreateAsync(
+        [AliasAs("Image")] StreamPart image,
+        [AliasAs("LicensePlateNumber")] string licensePlateNumber,
+        [AliasAs("CarBrand")] string carBrand,
+        [AliasAs("Model")] string model,
+        [AliasAs("EndOfLifeMileage")] int endOfLifeMileage,
+        [AliasAs("MaintenanceInterval")] int maintenanceInterval,
+        [AliasAs("CurrentMileage")] int currentMileage);
 }

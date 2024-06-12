@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
-             xmlns:theme="clr-namespace:SukiUI.Theme;assembly=SukiUI"
              xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
              xmlns:converters="clr-namespace:GreenMileSharing.Client.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -15,30 +14,31 @@
     <Design.DataContext>
         <viewModels:CreateNewTripViewModel />
     </Design.DataContext>
-    
+
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:ImageBytesToBitMap x:Key="ImageBytesToBitMap" />
+            <converters:SelectedItemToCar x:Key="SelectedItemToCar" />
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*"
           ColumnDefinitions="*,*">
-        <Border Classes="Card" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Margin="20 20 20 0">
+        <Border Classes="Card" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="20 20 20 0">
             <StackPanel Spacing="10">
-                <TextBox Text="{Binding CreateTripRequest.StartMileage, Mode=OneWayToSource}"
-                         Watermark="Start Mileage" UseFloatingWatermark="True"/>
-                <TextBox Text="{Binding CreateTripRequest.EndMileage, Mode=OneWayToSource}" 
-                         Watermark="End Mileage" UseFloatingWatermark="True"/>
+                <TextBox Text="{Binding SelectedCar.CurrentMileage}"
+                         Watermark="Start Mileage" UseFloatingWatermark="True" IsReadOnly="True" Foreground="SlateGray"/>
+                <TextBox Text="{Binding CreateTripRequest.EndMileage, Mode=OneWayToSource}"
+                         Watermark="End Mileage" UseFloatingWatermark="True" />
                 <controls:BusyArea IsBusy="{Binding CreateTripCommand.IsRunning}">
                     <Button Classes="Flat Rounded" Content="Register New Trip"
-                            Command="{Binding CreateTripCommand}"/>
+                            Command="{Binding CreateTripCommand}" />
                 </controls:BusyArea>
             </StackPanel>
         </Border>
         <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20"
-                 ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar, Mode=OneWayToSource}">
+                 ItemsSource="{Binding Cars}" Name="Cars" SelectedItem="{Binding SelectedCar, Converter={StaticResource SelectedItemToCar}}" >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -46,54 +46,54 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Classes="Hoverable Card" Width="240" Height="240" DoubleTapped="OpenCarDetailsView">
-                        <Grid ShowGridLines="False"
-                              ColumnDefinitions="Auto,*, Auto"
-                              RowDefinitions="Auto,Auto,*">
-                            <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-                                    HorizontalAlignment="Center" VerticalAlignment="Top"
-                                    ClipToBounds="True" Width="200" Height="150" Classes="Card">
-                                <Viewbox Width="200" Height="200" Stretch="Uniform">
-                                    <Image Source="{Binding Image, Converter={StaticResource ImageBytesToBitMap}}" />
-                                </Viewbox>
-                            </Border>
+                        <Border Classes="Hoverable Card" Width="240" Height="240" DoubleTapped="OpenCarDetailsView">
+                            <Grid ShowGridLines="False"
+                                  ColumnDefinitions="Auto,*, Auto"
+                                  RowDefinitions="Auto,Auto,*">
+                                <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                                        ClipToBounds="True" Width="200" Height="150" Classes="Card">
+                                    <Viewbox Width="200" Height="150" Stretch="UniformToFill">
+                                        <Image Source="{Binding Image, Converter={StaticResource ImageBytesToBitMap}}" />
+                                    </Viewbox>
+                                </Border>
 
-                            <Label Grid.Row="1" Grid.Column="0" Margin="10"
-                                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                                   Content="{Binding CarBrand}" Foreground="{DynamicResource SukiText}"/>
+                                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Content="{Binding CarBrand}" Foreground="{DynamicResource SukiText}"/>
 
-                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                   HorizontalAlignment="Right" VerticalAlignment="Center"
-                                   Content="{Binding Model}" Foreground="{DynamicResource SukiText}"/>
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Right" VerticalAlignment="Center"
+                                       Content="{Binding Model}" Foreground="{DynamicResource SukiText}"/>
 
-                            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                                    CornerRadius="7" ClipToBounds="True">
-                                <Label HorizontalAlignment="Center" Padding="10 0"
-                                       Content="{Binding CurrentMileage}" FontWeight="Medium">
-                                    <Label.Background>
-                                        <SolidColorBrush Color="PaleGreen" Opacity="0.1" />
-                                    </Label.Background>
-                                    <Label.Foreground>
-                                        <SolidColorBrush Color="Green" Opacity="0.6" />
-                                    </Label.Foreground>
-                                </Label>
-                            </Border>
-                            <Border Grid.Row="2" Grid.Column="0"
-                                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                                    CornerRadius="7" ClipToBounds="True">
-                                <Label HorizontalAlignment="Center" Padding="10 0"
-                                       Content="{Binding EndOfLifeMileage}" FontWeight="Medium">
-                                    <Label.Background>
-                                        <SolidColorBrush Color="IndianRed" Opacity="0.1" />
-                                    </Label.Background>
-                                    <Label.Foreground>
-                                        <SolidColorBrush Color="Red" Opacity="0.6" />
-                                    </Label.Foreground>
-                                </Label>
-                            </Border>
-                        </Grid>
-                    </Border>
+                                <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                        CornerRadius="7" ClipToBounds="True">
+                                    <Label HorizontalAlignment="Center" Padding="10 2"
+                                           Content="{Binding CurrentMileage}" FontWeight="Medium">
+                                        <Label.Background>
+                                            <SolidColorBrush Color="PaleGreen" Opacity="0.1" />
+                                        </Label.Background>
+                                        <Label.Foreground>
+                                            <SolidColorBrush Color="Green" Opacity="0.6" />
+                                        </Label.Foreground>
+                                    </Label>
+                                </Border>
+                                <Border Grid.Row="2" Grid.Column="0"
+                                        VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                        CornerRadius="7" ClipToBounds="True">
+                                    <Label HorizontalAlignment="Center" Padding="10 2"
+                                           Content="{Binding EndOfLifeMileage}" FontWeight="Medium">
+                                        <Label.Background>
+                                            <SolidColorBrush Color="IndianRed" Opacity="0.1" />
+                                        </Label.Background>
+                                        <Label.Foreground>
+                                            <SolidColorBrush Color="Brown" Opacity="0.6" />
+                                        </Label.Foreground>
+                                    </Label>
+                                </Border>
+                            </Grid>
+                        </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

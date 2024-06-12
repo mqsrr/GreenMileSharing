@@ -33,11 +33,17 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="HeroIcons.Avalonia" Version="1.0.2" />
         <PackageReference Include="Live.Avalonia" Version="1.4.1" />
+        <PackageReference Include="Mediator.Abstractions" Version="2.1.7" />
+        <PackageReference Include="Mediator.SourceGenerator" Version="2.1.7">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
         <PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
         <PackageReference Include="Refit.Newtonsoft.Json" Version="7.0.0" />
         <PackageReference Include="Riok.Mapperly" Version="3.5.1" />
         <PackageReference Include="Scrutor" Version="4.2.2" />
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
         <PackageReference Include="SukiUI" Version="6.0.0-beta6" />
     </ItemGroup>
 

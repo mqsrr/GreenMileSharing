@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GreenMileSharing.Client.Models;
 
-internal sealed class Car
+public sealed class Car
 {
     public required Guid Id { get; init; }
     

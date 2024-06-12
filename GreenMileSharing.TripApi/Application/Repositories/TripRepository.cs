@@ -28,7 +28,7 @@ internal sealed class TripRepository : ITripRepository
         await _dbContext.Cars
             .Where(car => car.Id == trip.CarId)
             .ExecuteUpdateAsync(setter =>
-                setter.SetProperty(car => car.CurrentMileage, trip.StartMileage + trip.EndMileage), cancellationToken);
+                setter.SetProperty(car => car.CurrentMileage, trip.EndMileage), cancellationToken);
         
         return trip;
     }
