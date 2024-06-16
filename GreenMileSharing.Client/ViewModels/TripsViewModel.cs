@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using AutoBogus;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GreenMileSharing.Client.Contracts.Trips;
@@ -18,20 +17,19 @@ internal sealed partial class TripsViewModel : ViewModelBase
     private CreateTripRequest _createTripRequest;
 
     [ObservableProperty]
-    private List<Trip> _trips;
+    private ObservableCollection<Trip> _trips;
 
     public TripsViewModel()
     {
         CreateTripRequest = new CreateTripRequest();
-        Trips = StaticStorage.Employee.Trips?
+        Trips = new ObservableCollection<Trip>(StaticStorage.Employee.Trips?
             .Select(trip =>
             {
                 var tripCar = StaticStorage.Cars.FirstOrDefault(car => car.Id == trip.CarId);
                 trip.Car = tripCar;
                 
                 return trip;
-            }).ToList() ?? [];
-
+            }).OrderBy(trip => trip.CarId) ?? Enumerable.Empty<Trip>());
     }
 
     [RelayCommand]

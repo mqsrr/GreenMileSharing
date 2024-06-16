@@ -41,10 +41,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:GlassCard Width="240" Height="160" Margin="5">
+                        <controls:GlassCard Width="240" Height="190" Margin="5">
                             <Grid ShowGridLines="False"
                                   ColumnDefinitions="Auto, *, Auto"
-                                  RowDefinitions="Auto, Auto, *">
+                                  RowDefinitions="Auto, Auto, Auto">
                                 <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
                                         HorizontalAlignment="Center" VerticalAlignment="Top"
                                         ClipToBounds="True" Width="200" Height="100" Classes="Card">
@@ -53,8 +53,14 @@
                                             Source="{Binding Car.Image, Converter={StaticResource ImageBytesToBitMap}}" />
                                     </Viewbox>
                                 </Border>
-
-                                <Border Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom"
+                                
+                                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"
+                                       Content="{Binding Car.Model}" Margin="5 0"/>
+                                
+                                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right"
+                                       Content="{Binding Car.LicensePlateNumber}" Margin="5 0"/>
+                                
+                                <Border Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom"
                                         CornerRadius="7" ClipToBounds="True" Margin="5">
                                     <Label HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                            Content="{Binding EndMileage}" FontWeight="Medium">
@@ -67,12 +73,12 @@
                                     </Label>
                                 </Border>
 
-                                <heroIcons:HeroIcon Grid.Row="1" Grid.Column="1"
+                                <heroIcons:HeroIcon Grid.Row="2" Grid.Column="1"
                                                     Type="ArrowRight" Min="True"
                                                     HorizontalAlignment="Center" VerticalAlignment="Center"
                                                     Height="10" />
 
-                                <Border Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom"
+                                <Border Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom"
                                         CornerRadius="7" ClipToBounds="True" Margin="5">
                                     <Label HorizontalAlignment="Center" VerticalContentAlignment="Center"
                                            Content="{Binding StartMileage}" FontWeight="Medium">

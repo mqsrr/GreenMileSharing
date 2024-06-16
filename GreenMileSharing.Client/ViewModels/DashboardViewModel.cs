@@ -30,5 +30,13 @@ internal sealed partial class DashboardViewModel : ViewModelBase
         var createCarUserControl = App.Services.GetRequiredService<CreateCarUserControl>();
         SukiHost.ShowDialog(createCarUserControl, allowBackgroundClose:true);
     }
+    
+    [RelayCommand]
+    private void ReloadCars()
+    {
+        Cars = new ObservableCollection<Car>(StaticStorage.Cars);
+    }
+    
+    
 }
 

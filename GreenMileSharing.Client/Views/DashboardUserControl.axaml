@@ -41,6 +41,14 @@
                 Classes="Flat Rounded" HorizontalAlignment="Left" 
                 Command="{Binding OpenCreateCarUserControlCommand}" Content="Add Car"/>
         
+        <Button Grid.Row="2" Grid.Column="1" Margin="10"
+                Classes="Flat Rounded" HorizontalAlignment="Right"
+                Command="{Binding ReloadCarsCommand}">
+            <Button.Content>
+                <icons:HeroIcon Type="MagnifyingGlassCircle" Min="True"/>
+            </Button.Content>
+        </Button>
+        
         <ScrollViewer Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 20 0 0">
             <ItemsControl ItemsSource="{Binding Cars}">
                 <ItemsControl.ItemsPanel>

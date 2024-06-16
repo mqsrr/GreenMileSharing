@@ -19,7 +19,7 @@ public sealed class Car
 
     public required int MaintenanceInterval { get; init; }
 
-    public required int CurrentMileage { get; init; }
+    public required int CurrentMileage { get; set; }
 
     public IEnumerable<Trip>? Trips { get; init; } 
 }

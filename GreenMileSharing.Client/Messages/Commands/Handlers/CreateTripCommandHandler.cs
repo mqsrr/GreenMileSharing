@@ -6,15 +6,15 @@ using Mediator;
 
 namespace GreenMileSharing.Client.Messages.Commands.Handlers;
 
-internal sealed class CreateTripCommandHandler(TripsViewModel tripsViewModel) : ICommandHandler<CreateTripCommand>
+internal sealed class CreateTripCommandHandler(TripsViewModel tripsViewModel, DashboardViewModel dashboardViewModel) : ICommandHandler<CreateTripCommand>
 {
     public ValueTask<Unit> Handle(CreateTripCommand command, CancellationToken cancellationToken)
     {
         var createdTrip = command.Trip;
-
+        
         tripsViewModel.Trips.Add(createdTrip);
         StaticStorage.Employee.Trips?.Add(createdTrip);
-
+        
         return Unit.ValueTask;
     }
 }

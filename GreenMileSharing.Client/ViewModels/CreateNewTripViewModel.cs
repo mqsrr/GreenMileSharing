@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoBogus;
@@ -24,7 +25,7 @@ internal sealed partial class CreateNewTripViewModel : ViewModelBase
     private Car? _selectedCar;
 
     [ObservableProperty]
-    private IEnumerable<Car> _cars;
+    private ObservableCollection<Car> _cars;
 
     private readonly ITripsWebApi _tripsWebApi;
     private readonly ISender _sender;    
@@ -36,7 +37,7 @@ internal sealed partial class CreateNewTripViewModel : ViewModelBase
         CreateTripRequest = new CreateTripRequest();
         
         SelectedCar = null!;
-        Cars = StaticStorage.Cars;
+        Cars = new ObservableCollection<Car>(StaticStorage.Cars);
     }
     
     public CreateNewTripViewModel()
@@ -46,7 +47,7 @@ internal sealed partial class CreateNewTripViewModel : ViewModelBase
         CreateTripRequest = new CreateTripRequest();
         
         SelectedCar = null!;
-        Cars = AutoFaker.Generate<Car>(10);
+        Cars = new ObservableCollection<Car>(AutoFaker.Generate<Car>(10));
     }
 
     [RelayCommand]
@@ -72,9 +73,14 @@ internal sealed partial class CreateNewTripViewModel : ViewModelBase
         }
         
         await SukiHost.ShowToast("Success", "Trip has been registered!", SukiToastType.Success);
+        
+        var createdTrip = response.Content!;
+        SelectedCar.CurrentMileage = Convert.ToInt32(CreateTripRequest.EndMileage);
+            
+        createdTrip.Car = SelectedCar;
         await _sender.Send(new CreateTripCommand
         {
-            Trip = response.Content!
+            Trip = createdTrip
         }, cancellationToken).ConfigureAwait(false);
         
         SukiHost.CloseDialog();
