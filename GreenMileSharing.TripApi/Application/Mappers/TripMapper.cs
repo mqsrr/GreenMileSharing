@@ -7,5 +7,5 @@ namespace GreenMileSharing.TripApi.Application.Mappers;
 [Mapper]
 internal static partial class TripMapper
 {
-    internal static partial Trip ToTrip(this CreateTripRequests request);
+    internal static partial Trip ToTrip(this CreateTripRequest request);
 }

@@ -18,6 +18,15 @@ internal sealed class EmployeeRepository : IEmployeeRepository
         _endpointProvider = endpointProvider;
     }
 
+    public async Task<IEnumerable<Employee>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        var employees = await _dbContext.Employees
+            .Include(employee => employee.Trips)
+            .ToListAsync(cancellationToken);
+
+        return employees;
+    }
+
     public async Task<Employee?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var employee = await _dbContext.Employees.FindAsync([id], cancellationToken);

@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using GreenMileSharing.Client.Helpers;
 using GreenMileSharing.Client.Models;
@@ -10,6 +12,12 @@ namespace GreenMileSharing.Client.RefitClients;
 internal interface IEmployeesWebApi
 {
 
+    [Get(ApiEndpoints.Employee.GetAll)]
+    Task<IApiResponse<IEnumerable<Employee>>> GetAllAsync(CancellationToken cancellationToken);
+    
     [Get(ApiEndpoints.Employee.GetByUsername)]
     Task<IApiResponse<Employee>> GetByUsernameAsync(string username, CancellationToken cancellationToken);
+    
+    [Delete(ApiEndpoints.Employee.DeleteById)]
+    Task<IApiResponse> DeleteByIdAsync(Guid id, CancellationToken cancellationToken);
 }

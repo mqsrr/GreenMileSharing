@@ -1,22 +1,17 @@
-﻿using FluentValidation;
+using FluentValidation;
 using GreenMileSharing.TripApi.Application.Contracts.Requests.Trips;
 
 namespace GreenMileSharing.TripApi.Application.Validators.Trips;
 
-internal sealed class CreateTripRequestValidator : AbstractValidator<CreateTripRequests>
+internal sealed class CreateTripRequestValidator : AbstractValidator<CreateTripRequest>
 {
     public CreateTripRequestValidator()
     {
-        /*RuleFor(trip => trip.Car)
+        RuleFor(request => request.StartMileage)
             .NotNull();
 
-        RuleFor(trip => trip.Employee)
-            .NotEmpty();
-
-        RuleFor(trip => trip.StartMileage)
-            .NotEmpty();
-        
-        RuleFor(trip => trip.EndMileage)
-            .NotEmpty();*/
-    }    
+        RuleFor(request => request.EndMileage)
+            .NotEmpty()
+            .GreaterThan(request => request.StartMileage);
+    }
 }

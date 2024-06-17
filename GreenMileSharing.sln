@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Domain", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.IdentityApi", "GreenMileSharing.IdentityApi\GreenMileSharing.IdentityApi.csproj", "{05B41562-FCF0-43F9-B2B4-EFE637F6A751}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.EmailService", "GreenMileSharing.EmailService\GreenMileSharing.EmailService.csproj", "{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Shared", "GreenMileSharing.Shared\GreenMileSharing.Shared.csproj", "{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenMileSharing.Messages", "GreenMileSharing.Messages\GreenMileSharing.Messages.csproj", "{A3D00789-6985-4FFC-8007-C8104D1813FC}"
@@ -39,10 +37,6 @@ Global
 		{05B41562-FCF0-43F9-B2B4-EFE637F6A751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05B41562-FCF0-43F9-B2B4-EFE637F6A751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05B41562-FCF0-43F9-B2B4-EFE637F6A751}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DD87B17-154B-4322-80EC-AC4A0CFFAD4E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AE4B214-CFC9-4B4F-A747-B7F37984C03D}.Release|Any CPU.ActiveCfg = Release|Any CPU

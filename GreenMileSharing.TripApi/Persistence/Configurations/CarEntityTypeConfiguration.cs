@@ -11,7 +11,7 @@ internal sealed class CarEntityTypeConfiguration : IEntityTypeConfiguration<Car>
     {
         builder.ToTable("Cars")
             .HasKey(car => car.Id);
-
+        
         builder.Property(car => car.CarBrand)
             .IsRequired()
             .IsUnicode(false)
@@ -34,7 +34,7 @@ internal sealed class CarEntityTypeConfiguration : IEntityTypeConfiguration<Car>
         builder.Property(car => car.EndOfLifeMileage)
             .IsRequired()
             .IsUnicode(false);
-
+        
         builder.HasMany(car => car.Trips)
             .WithOne()
             .HasForeignKey(trip => trip.CarId);

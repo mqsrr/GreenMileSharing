@@ -15,7 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\Contracts\Requests\Employees\" />
       <Folder Include="Persistence\Migrations\" />
     </ItemGroup>
 

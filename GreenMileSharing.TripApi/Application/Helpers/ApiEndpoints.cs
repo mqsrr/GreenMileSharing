@@ -8,6 +8,8 @@ internal static class ApiEndpoints
     {
         private const string Base = $"{ApiBase}/employees";
 
+        public const string GetAll = Base;
+        
         public const string GetById = $"{Base}/{{id:guid}}";
         
         public const string GetByUsername = $"{Base}/{{username}}";

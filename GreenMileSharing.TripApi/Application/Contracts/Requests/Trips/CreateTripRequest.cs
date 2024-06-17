@@ -1,6 +1,6 @@
 ﻿namespace GreenMileSharing.TripApi.Application.Contracts.Requests.Trips;
 
-public sealed class CreateTripRequests
+public sealed class CreateTripRequest
 {
     public Guid Id { get; } = Guid.NewGuid();
 

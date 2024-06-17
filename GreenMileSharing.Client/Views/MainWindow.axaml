@@ -10,8 +10,7 @@
         x:Class="GreenMileSharing.Client.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Client"
-        Classes="NakedWindow">
+        Title="Client">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -41,6 +40,14 @@
                 </controls:SukiSideMenuItem.Icon>
                 <controls:SukiSideMenuItem.PageContent>
                     <views:TripsUserControl/>
+                </controls:SukiSideMenuItem.PageContent>
+            </controls:SukiSideMenuItem>            
+            <controls:SukiSideMenuItem Header="Manage">
+                <controls:SukiSideMenuItem.Icon>
+                    <heroIcons:HeroIcon Type="ClipboardDocumentCheck" Min="True"/>
+                </controls:SukiSideMenuItem.Icon>
+                <controls:SukiSideMenuItem.PageContent>
+                    <views:ManagementUserControl/>
                 </controls:SukiSideMenuItem.PageContent>
             </controls:SukiSideMenuItem>
         </controls:SukiSideMenu.Items>

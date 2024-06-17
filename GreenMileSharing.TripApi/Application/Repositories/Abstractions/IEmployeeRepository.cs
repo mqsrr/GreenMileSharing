@@ -4,6 +4,8 @@ namespace GreenMileSharing.TripApi.Application.Repositories.Abstractions;
 
 public interface IEmployeeRepository
 {
+    Task<IEnumerable<Employee>> GetAllAsync(CancellationToken cancellationToken);
+    
     Task<Employee?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     
     Task<Employee?> GetByUsernameAsync(string username, CancellationToken cancellationToken);

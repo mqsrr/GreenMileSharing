@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
+             xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+             xmlns:converters="clr-namespace:GreenMileSharing.Client.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GreenMileSharing.Client.Views.ManagementUserControl"
+             x:DataType="viewModels:ManagementViewModel"
+             FontFamily="{StaticResource Montserrat-Regular}">
+    
+    <Design.DataContext>
+        <viewModels:ManagementViewModel />
+    </Design.DataContext>
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:ImageBytesToBitMap x:Key="ImageBytesToBitMap" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+               Margin="10">
+        <controls:GlassCard Margin="5" IsVisible="{Binding Employees.Count}">
+            <StackPanel Spacing="5">
+                <Button Content="Delete Selected Employee" IsEnabled="{Binding SelectedEmployee}"
+                        Command="{Binding DeleteEmployeeCommand}" Classes="Flat Rounded"/>
+                
+                <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Classes="Hoverable Card" Margin="5">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Username}" Foreground="{DynamicResource SukiText}"/>
+                                    <GridSplitter />  
+                                    <Label Content="{Binding Trips.Count, StringFormat='Amount Of Trips: {0}'}"
+                                           HorizontalAlignment="Right" Foreground="{DynamicResource SukiText}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>                
+                </ListBox>
+            </StackPanel>
+        </controls:GlassCard>
+        <controls:GlassCard Margin="5" IsVisible="{Binding Cars.Count}">
+            <StackPanel Spacing="5">
+                <Button Content="Delete Selected Car" IsEnabled="{Binding SelectedCar}"
+                        Command="{Binding DeleteCarCommand}" Classes="Flat Rounded"/>
+                
+                <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Classes="Hoverable Card">
+                                <Grid ShowGridLines="False"
+                                      ColumnDefinitions="Auto,Auto"
+                                      RowDefinitions="Auto,Auto">
+                                    <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                                            HorizontalAlignment="Center"
+                                            ClipToBounds="True" Width="80" Classes="Card">
+                                        <Viewbox Width="80" Stretch="Uniform">
+                                            <Image Source="{Binding Image, Converter={StaticResource ImageBytesToBitMap}}" />
+                                        </Viewbox>
+                                    </Border>
+                                    <StackPanel Grid.Row="0" Grid.Column="1" 
+                                                Spacing="1">
+                                        <Label Content="{Binding Model, StringFormat='Model: {0}'}" Foreground="{DynamicResource SukiText}"/>
+                                        <Label Content="{Binding CarBrand, StringFormat='Brand: {0}'}" Foreground="{DynamicResource SukiText}"/>
+                                        <Label Content="{Binding LicensePlateNumber, StringFormat='Plate Number: {0}'}" Foreground="{DynamicResource SukiText}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>                
+                </ListBox>
+            </StackPanel>
+        </controls:GlassCard>
+    </DockPanel>
+</UserControl>

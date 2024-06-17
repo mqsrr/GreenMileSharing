@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using GreenMileSharing.Client.Contracts.Cars;
 using GreenMileSharing.Client.Helpers;
 using GreenMileSharing.Client.Models;
 using Refit;
@@ -26,4 +24,8 @@ internal interface ICarsWebApi
         [AliasAs("EndOfLifeMileage")] int endOfLifeMileage,
         [AliasAs("MaintenanceInterval")] int maintenanceInterval,
         [AliasAs("CurrentMileage")] int currentMileage);
+    
+    [Delete(ApiEndpoints.Car.DeleteById)]
+    Task<IApiResponse> DeleteByIdAsync(Guid id, CancellationToken cancellationToken);
+
 }

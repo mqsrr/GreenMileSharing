@@ -20,12 +20,15 @@ internal sealed class CreateCarRequestValidator : AbstractValidator<CreateCarReq
             .MaximumLength(255);
         
         RuleFor(car => car.CurrentMileage)
-            .NotEmpty();
+            .NotNull();
         
         RuleFor(car => car.EndOfLifeMileage)
-            .NotEmpty();
+            .NotEmpty()
+            .GreaterThan(car => car.CurrentMileage);
         
         RuleFor(car => car.MaintenanceInterval)
-            .NotEmpty();
+            .NotEmpty()
+            .GreaterThan(car => car.CurrentMileage)
+            .LessThan(car => car.EndOfLifeMileage);
     }
 }

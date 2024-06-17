@@ -19,7 +19,7 @@ public sealed class TripsController : ControllerBase
     }
     
     [HttpPost(ApiEndpoints.Trip.Create)]
-    public async Task<IActionResult> Create([FromBody] CreateTripRequests request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create([FromBody] CreateTripRequest request, CancellationToken cancellationToken)
     {
         var createdRequest = await _tripRepository.CreateAsync(request.ToTrip(), cancellationToken);
         return createdRequest is not null

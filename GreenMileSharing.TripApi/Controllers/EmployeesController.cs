@@ -16,6 +16,13 @@ public sealed class EmployeesController : ControllerBase
         _employeeRepository = employeeRepository;
     }
 
+    [HttpGet(ApiEndpoints.Employee.GetAll)]
+    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    {
+        var employees = await _employeeRepository.GetAllAsync(cancellationToken);
+        return Ok(employees);
+    }
+    
     [HttpGet(ApiEndpoints.Employee.GetById)]
     public async Task<IActionResult> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {

@@ -1,7 +1,10 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using GreenMileSharing.IdentityApi.Application.Consumers;
 using GreenMileSharing.IdentityApi.Application.Extensions;
 using GreenMileSharing.IdentityApi.Application.Models;
 using GreenMileSharing.IdentityApi.Application.Services.Abstractions;
+using GreenMileSharing.IdentityApi.Application.Validation;
 using GreenMileSharing.IdentityApi.Persistence;
 using GreenMileSharing.Messages;
 using GreenMileSharing.Shared.Extensions;
@@ -29,6 +32,9 @@ builder.Services.AddOptionsWithValidateOnStart<JwtSettings>()
 
 builder.Services.AddOptionsWithValidateOnStart<RabbitMqSettings>()
     .Bind(builder.Configuration.GetRequiredSection(RabbitMqSettings.SectionName));
+
+builder.Services.AddFluentValidationAutoValidation()
+    .AddValidatorsFromAssemblyContaining<LoginRequestValidator>(ServiceLifetime.Singleton, includeInternalTypes: true);
 
 builder.Services.AddMassTransit(busConfigurator =>
 {
