@@ -1,9 +1,11 @@
+using Asp.Versioning;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using GreenMileSharing.Messages;
 using GreenMileSharing.Shared.Extensions;
 using GreenMileSharing.Shared.Settings;
 using GreenMileSharing.TripApi.Application.Consumers;
+using GreenMileSharing.TripApi.Application.Repositories;
 using GreenMileSharing.TripApi.Application.Repositories.Abstractions;
 using GreenMileSharing.TripApi.Application.Validators;
 using GreenMileSharing.TripApi.Persistence;
@@ -28,16 +30,35 @@ builder.Services.AddApplicationService<IEmployeeRepository>();
 
 builder.Services.AddApplicationService<ICarRepository>();
 
+builder.Services.AddKeyedScoped<ICarRepository, JsonCarRepository>(nameof(JsonCarRepository));
+builder.Services.AddKeyedScoped<IEmployeeRepository, JsonEmployeeRepository>(nameof(JsonEmployeeRepository));
+builder.Services.AddKeyedScoped<ITripRepository, JsonTripRepository>(nameof(JsonTripRepository));
+
 builder.Services.AddFluentValidationAutoValidation()
     .AddValidatorsFromAssemblyContaining<IValidatorsMarker>(ServiceLifetime.Singleton, includeInternalTypes: true);
 
 builder.Services.AddOptionsWithValidateOnStart<RabbitMqSettings>()
     .Bind(builder.Configuration.GetRequiredSection(RabbitMqSettings.SectionName));
 
+builder.Services
+    .AddApiVersioning(options =>
+    {
+        options.ReportApiVersions = true;
+        options.DefaultApiVersion = new ApiVersion(2.0);
+        options.ApiVersionReader = new UrlSegmentApiVersionReader();
+    })
+    .AddMvc()
+    .AddApiExplorer(options =>
+    {
+        options.GroupNameFormat = "'v'V";
+        options.SubstituteApiVersionInUrl = true;
+    });
+
 builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.SetKebabCaseEndpointNameFormatter();
     busConfigurator.AddConsumer<RegisterEmployeeConsumer>();
+    busConfigurator.AddConsumer<RegisterEmployeeJsonConsumer>();
     
     busConfigurator.UsingRabbitMq((context, configurator) =>
     {

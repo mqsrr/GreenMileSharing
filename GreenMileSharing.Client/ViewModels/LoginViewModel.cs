@@ -44,7 +44,7 @@ internal partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task LoginAsync(CancellationToken cancellationToken)
     {
-        var authResponse = await _identityWebApi.LoginAsync(LoginRequest, cancellationToken);
+        var authResponse = await _identityWebApi.LoginAsync(StaticStorage.ApiVersion, LoginRequest, cancellationToken);
         if (!authResponse.IsSuccessStatusCode)
         {
             await SukiHost.ShowToast("Incorrect Credentials", 
@@ -55,9 +55,10 @@ internal partial class LoginViewModel : ViewModelBase
         }
         
         StaticStorage.Token = authResponse.Content!.Token;
+        StaticStorage.IdentityRole = authResponse.Content!.Role;
         
-        var loggedInEmployeeResponse = await _employeesWebApi.GetByUsernameAsync(LoginRequest.UserName, cancellationToken);
-        var carsResponse = await _carsWebApi.GetAllAsync(cancellationToken);
+        var loggedInEmployeeResponse = await _employeesWebApi.GetByUsernameAsync(StaticStorage.ApiVersion, LoginRequest.UserName, cancellationToken);
+        var carsResponse = await _carsWebApi.GetAllAsync(StaticStorage.ApiVersion, cancellationToken);
         
         if (!loggedInEmployeeResponse.IsSuccessStatusCode || !carsResponse.IsSuccessStatusCode)
         {

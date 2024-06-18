@@ -1,17 +1,20 @@
-﻿using GreenMileSharing.TripApi.Application.Helpers;
+﻿using Asp.Versioning;
+using GreenMileSharing.TripApi.Application.Helpers;
+using GreenMileSharing.TripApi.Application.Repositories;
 using GreenMileSharing.TripApi.Application.Repositories.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GreenMileSharing.TripApi.Controllers;
+namespace GreenMileSharing.TripApi.Controllers.V1;
 
+[ApiVersion(1.0)]
 [ApiController]
 [Authorize]
 public sealed class EmployeesController : ControllerBase
 {
     private readonly IEmployeeRepository _employeeRepository;
 
-    public EmployeesController(IEmployeeRepository employeeRepository)
+    public EmployeesController([FromKeyedServices(nameof(JsonEmployeeRepository))] IEmployeeRepository employeeRepository)
     {
         _employeeRepository = employeeRepository;
     }

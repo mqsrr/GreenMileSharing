@@ -41,7 +41,7 @@ internal partial class RegisterViewModel : ViewModelBase
     [RelayCommand]
     private async Task RegisterAsync(CancellationToken cancellationToken)
     {
-        var authResponse = await _identityWebApi.RegisterAsync(RegisterRequest, cancellationToken);
+        var authResponse = await _identityWebApi.RegisterAsync(StaticStorage.ApiVersion, RegisterRequest, cancellationToken);
         if (!authResponse.IsSuccessStatusCode)
         {
             await SukiHost.ShowToast("Register Failure!",
@@ -52,9 +52,10 @@ internal partial class RegisterViewModel : ViewModelBase
         }
 
         StaticStorage.Token = authResponse.Content!.Token;
-        
-        var employeeResponse = await _employeesWebApi.GetByUsernameAsync(RegisterRequest.UserName, cancellationToken);
-        var carsResponse = await _carsWebApi.GetAllAsync(cancellationToken);
+        StaticStorage.IdentityRole = authResponse.Content!.Role;
+
+        var employeeResponse = await _employeesWebApi.GetByUsernameAsync(StaticStorage.ApiVersion, RegisterRequest.UserName, cancellationToken);
+        var carsResponse = await _carsWebApi.GetAllAsync(StaticStorage.ApiVersion, cancellationToken);
         
         if (!employeeResponse.IsSuccessStatusCode || !carsResponse.IsSuccessStatusCode)
         {

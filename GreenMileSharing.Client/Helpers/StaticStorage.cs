@@ -10,4 +10,8 @@ internal static class StaticStorage
     public static List<Car> Cars { get; internal set; } = null!;
     
     public static string Token { get; internal set; } = null!;
+    
+    public static string IdentityRole { get; internal set; } = null!;
+    
+    public static string ApiVersion { get; internal set; } = "2";
 }

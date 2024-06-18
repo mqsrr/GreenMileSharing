@@ -4,7 +4,7 @@ internal static class ApiEndpoints
 {
     public static class Authentication
     {
-        private const string Base = "/auth";
+        private const string Base = "/v{apiVersion}/auth";
 
         public const string Register = $"{Base}/register";
         public const string Login = $"{Base}/login";
@@ -12,7 +12,7 @@ internal static class ApiEndpoints
     
     internal static class Employee
     {
-        private const string Base = "/employees";
+        private const string Base = "/v{apiVersion}/employees";
 
         public const string GetAll = Base;
         
@@ -27,7 +27,7 @@ internal static class ApiEndpoints
     
     internal static class Car
     {
-        private const string Base = "/cars";
+        private const string Base = "/v{apiVersion}/cars";
 
         public const string Create = Base;
         
@@ -40,7 +40,7 @@ internal static class ApiEndpoints
     
     internal static class Trip
     {
-        private const string Base = "/trips";
+        private const string Base = "/v{apiVersion}/trips";
 
         public const string Create = Base;
 

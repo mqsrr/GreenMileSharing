@@ -12,11 +12,12 @@ namespace GreenMileSharing.Client.RefitClients;
 internal interface ICarsWebApi
 {
     [Get(ApiEndpoints.Car.GetAll)]
-    Task<IApiResponse<IEnumerable<Car>>> GetAllAsync(CancellationToken cancellationToken);
+    Task<IApiResponse<IEnumerable<Car>>> GetAllAsync(string apiVersion, CancellationToken cancellationToken);
     
     [Multipart]
     [Post(ApiEndpoints.Car.GetAll)]
     Task<IApiResponse<Car>> CreateAsync(
+        string apiVersion,
         [AliasAs("Image")] StreamPart image,
         [AliasAs("LicensePlateNumber")] string licensePlateNumber,
         [AliasAs("CarBrand")] string carBrand,
@@ -26,6 +27,6 @@ internal interface ICarsWebApi
         [AliasAs("CurrentMileage")] int currentMileage);
     
     [Delete(ApiEndpoints.Car.DeleteById)]
-    Task<IApiResponse> DeleteByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<IApiResponse> DeleteByIdAsync(string apiVersion, Guid id, CancellationToken cancellationToken);
 
 }

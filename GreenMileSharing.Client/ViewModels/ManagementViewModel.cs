@@ -62,7 +62,7 @@ internal sealed partial class ManagementViewModel : ViewModelBase
     
     internal async Task InitializeAsync()
     {
-        var employeesResponse = await _employeesWebApi.GetAllAsync(CancellationToken.None);
+        var employeesResponse = await _employeesWebApi.GetAllAsync(StaticStorage.ApiVersion, CancellationToken.None);
         if (!employeesResponse.IsSuccessStatusCode)
         {
             await SukiHost.ShowToast("Failure", "Employees information couldn't be fetched", SukiToastType.Error);
@@ -79,7 +79,7 @@ internal sealed partial class ManagementViewModel : ViewModelBase
     [RelayCommand]
     private async Task DeleteEmployeeAsync(CancellationToken cancellationToken)
     {
-        var response = await _employeesWebApi.DeleteByIdAsync(SelectedEmployee.Id, cancellationToken);
+        var response = await _employeesWebApi.DeleteByIdAsync(StaticStorage.ApiVersion, SelectedEmployee.Id, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
             await SukiHost.ShowToast("Failure", "Employee couldn't be deleted!", SukiToastType.Error);
@@ -93,7 +93,7 @@ internal sealed partial class ManagementViewModel : ViewModelBase
     [RelayCommand]
     private async Task DeleteCarAsync(CancellationToken cancellationToken)
     {
-        var response = await _carsWebApi.DeleteByIdAsync(SelectedCar.Id, cancellationToken);
+        var response = await _carsWebApi.DeleteByIdAsync(StaticStorage.ApiVersion, SelectedCar.Id, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
             await SukiHost.ShowToast("Failure", "Car couldn't be deleted!", SukiToastType.Error);

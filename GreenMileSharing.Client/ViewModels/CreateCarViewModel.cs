@@ -8,6 +8,7 @@ using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GreenMileSharing.Client.Contracts.Cars;
+using GreenMileSharing.Client.Helpers;
 using GreenMileSharing.Client.Messages.Commands;
 using GreenMileSharing.Client.RefitClients;
 using GreenMileSharing.Client.Views;
@@ -75,6 +76,7 @@ internal sealed partial class CreateCarViewModel : ViewModelBase
     private async Task CreateCarAsync(CancellationToken cancellationToken)
     {
         var response = await _carsWebApi.CreateAsync(
+            StaticStorage.ApiVersion,
             Request.Image,
             Request.LicensePlateNumber,
             Request.CarBrand,

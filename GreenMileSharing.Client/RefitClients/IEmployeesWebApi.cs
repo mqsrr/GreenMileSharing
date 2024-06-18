@@ -13,11 +13,11 @@ internal interface IEmployeesWebApi
 {
 
     [Get(ApiEndpoints.Employee.GetAll)]
-    Task<IApiResponse<IEnumerable<Employee>>> GetAllAsync(CancellationToken cancellationToken);
+    Task<IApiResponse<IEnumerable<Employee>>> GetAllAsync(string apiVersion, CancellationToken cancellationToken);
     
     [Get(ApiEndpoints.Employee.GetByUsername)]
-    Task<IApiResponse<Employee>> GetByUsernameAsync(string username, CancellationToken cancellationToken);
+    Task<IApiResponse<Employee>> GetByUsernameAsync(string apiVersion, string username, CancellationToken cancellationToken);
     
     [Delete(ApiEndpoints.Employee.DeleteById)]
-    Task<IApiResponse> DeleteByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<IApiResponse> DeleteByIdAsync(string apiVersion, Guid id, CancellationToken cancellationToken);
 }

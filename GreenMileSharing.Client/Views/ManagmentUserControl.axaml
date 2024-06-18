@@ -17,6 +17,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:ImageBytesToBitMap x:Key="ImageBytesToBitMap" />
+            <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     
@@ -24,10 +25,11 @@
                Margin="10">
         <controls:GlassCard Margin="5" IsVisible="{Binding Employees.Count}">
             <StackPanel Spacing="5">
-                <Button Content="Delete Selected Employee" IsEnabled="{Binding SelectedEmployee}"
+                <Button Content="Delete Selected Employee" IsEnabled="{Binding SelectedEmployee, Converter={StaticResource IsNotNullConverter}}"
                         Command="{Binding DeleteEmployeeCommand}" Classes="Flat Rounded"/>
                 
-                <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}">
+                <ListBox ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}"
+                         MaxHeight="600">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border Classes="Hoverable Card" Margin="5">
@@ -45,10 +47,11 @@
         </controls:GlassCard>
         <controls:GlassCard Margin="5" IsVisible="{Binding Cars.Count}">
             <StackPanel Spacing="5">
-                <Button Content="Delete Selected Car" IsEnabled="{Binding SelectedCar}"
+                <Button Content="Delete Selected Car" IsEnabled="{Binding SelectedCar, Converter={StaticResource IsNotNullConverter}}"
                         Command="{Binding DeleteCarCommand}" Classes="Flat Rounded"/>
                 
-                <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}">
+                <ListBox ItemsSource="{Binding Cars}" SelectedItem="{Binding SelectedCar}"
+                         MaxHeight="600">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border Classes="Hoverable Card">
@@ -57,8 +60,8 @@
                                       RowDefinitions="Auto,Auto">
                                     <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
                                             HorizontalAlignment="Center"
-                                            ClipToBounds="True" Width="80" Classes="Card">
-                                        <Viewbox Width="80" Stretch="Uniform">
+                                            ClipToBounds="True" Width="80" Height="60" Classes="Card">
+                                        <Viewbox Width="80"  Height="60" Stretch="UniformToFill">
                                             <Image Source="{Binding Image, Converter={StaticResource ImageBytesToBitMap}}" />
                                         </Viewbox>
                                     </Border>

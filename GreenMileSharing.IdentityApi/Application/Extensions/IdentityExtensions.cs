@@ -1,6 +1,7 @@
 ﻿using GreenMileSharing.IdentityApi.Application.Models;
 using GreenMileSharing.IdentityApi.Persistence;
 using Microsoft.AspNetCore.Identity;
+using IdentityRole = Microsoft.AspNetCore.Identity.IdentityRole;
 
 namespace GreenMileSharing.IdentityApi.Application.Extensions;
 

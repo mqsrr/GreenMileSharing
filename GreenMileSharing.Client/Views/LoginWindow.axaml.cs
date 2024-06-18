@@ -1,6 +1,9 @@
 ﻿using System;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Interactivity;
+using GreenMileSharing.Client.Helpers;
 using GreenMileSharing.Client.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using SukiUI.Controls;
@@ -37,5 +40,13 @@ internal partial class LoginWindow : SukiWindow
         ((SukiWindow)o!).Hide();
         args.Cancel = true;
         Show();
+    }
+
+    private void ToggleButton_OnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        var toggleButton = sender as ToggleButton;
+        StaticStorage.ApiVersion = toggleButton!.IsChecked!.Value
+            ? "1"
+            : "2";
     }
 }

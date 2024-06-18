@@ -2,7 +2,7 @@
 
 internal static class ApiEndpoints
 {
-    private const string ApiBase = "/api";
+    private const string ApiBase = "/api/v{apiVersion:apiVersion}";
     
     public static class Authentication
     {

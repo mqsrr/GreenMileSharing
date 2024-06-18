@@ -6,6 +6,7 @@
         xmlns:controls="clr-namespace:SukiUI.Controls;assembly=SukiUI"
         xmlns:heroIcons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
         xmlns:views="clr-namespace:GreenMileSharing.Client.Views"
+        xmlns:viewModels="clr-namespace:GreenMileSharing.Client.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="GreenMileSharing.Client.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -36,13 +37,13 @@
             </controls:SukiSideMenuItem>            
             <controls:SukiSideMenuItem Header="Trips">
                 <controls:SukiSideMenuItem.Icon>
-                    <heroIcons:HeroIcon Type="Truck" Min="True"/>
+                    <heroIcons:HeroIcon Type="Truck" Kind="Outline" Foreground="White"/>
                 </controls:SukiSideMenuItem.Icon>
                 <controls:SukiSideMenuItem.PageContent>
                     <views:TripsUserControl/>
                 </controls:SukiSideMenuItem.PageContent>
             </controls:SukiSideMenuItem>            
-            <controls:SukiSideMenuItem Header="Manage">
+            <controls:SukiSideMenuItem Header="Manage" IsVisible="{Binding IsManager}" IsEnabled="{Binding IsManager}">
                 <controls:SukiSideMenuItem.Icon>
                     <heroIcons:HeroIcon Type="ClipboardDocumentCheck" Min="True"/>
                 </controls:SukiSideMenuItem.Icon>

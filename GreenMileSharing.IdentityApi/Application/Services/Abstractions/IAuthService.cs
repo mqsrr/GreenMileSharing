@@ -4,7 +4,7 @@ namespace GreenMileSharing.IdentityApi.Application.Services.Abstractions;
 
 public interface IAuthService<in TUser>
 {
-    Task<AuthenticationResponse?> RegisterAsync(TUser user, string password, CancellationToken cancellationToken);
+    Task<AuthenticationResponse?> RegisterAsync(TUser user, string password, string role, CancellationToken cancellationToken);    
     
     Task<AuthenticationResponse?> LoginAsync(string username, string password, CancellationToken cancellationToken);
 }

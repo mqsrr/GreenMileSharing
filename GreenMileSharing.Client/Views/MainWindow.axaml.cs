@@ -1,6 +1,8 @@
 using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Input;
 using GreenMileSharing.Client.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using SukiUI;
 using SukiUI.Controls;
 

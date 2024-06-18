@@ -12,11 +12,11 @@ public sealed class Car
 
     public required string Model { get; init; }
 
-    public required int EndOfLifeMileage { get; init; }
+    public required int EndOfLifeMileage { get; set; }
 
     public required int MaintenanceInterval { get; init; }
 
     public required int CurrentMileage { get; init; }
 
-    public IEnumerable<Trip>? Trips { get; init; }  
+    public IEnumerable<Trip>? Trips { get; set; }  
 }

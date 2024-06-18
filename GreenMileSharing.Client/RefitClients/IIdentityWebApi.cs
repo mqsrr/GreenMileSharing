@@ -10,8 +10,8 @@ namespace GreenMileSharing.Client.RefitClients;
 internal interface IIdentityWebApi
 {
     [Post(ApiEndpoints.Authentication.Register)]
-    Task<IApiResponse<AuthResponse>> RegisterAsync([Body] RegisterRequest request, CancellationToken cancellationToken);
+    Task<IApiResponse<AuthResponse>> RegisterAsync(string apiVersion, [Body] RegisterRequest request, CancellationToken cancellationToken);
 
     [Post(ApiEndpoints.Authentication.Login)]
-    Task<IApiResponse<AuthResponse>> LoginAsync([Body] LoginRequest request, CancellationToken cancellationToken);
+    Task<IApiResponse<AuthResponse>> LoginAsync(string apiVersion, [Body] LoginRequest request, CancellationToken cancellationToken);
 }

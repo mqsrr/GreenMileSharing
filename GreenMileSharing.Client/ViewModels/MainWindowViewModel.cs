@@ -6,5 +6,5 @@ namespace GreenMileSharing.Client.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-
+    public static bool IsManager => StaticStorage.IdentityRole == "Manager";
 }

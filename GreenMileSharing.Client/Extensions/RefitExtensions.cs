@@ -16,7 +16,7 @@ public static class RefitClientExtensions
     {
         string baseAddress = Application.Current!.ApplicationLifetime is ISingleViewApplicationLifetime
             ? "http://10.0.2.2:8085"
-            : "http://localhost:8080";
+            : $"http://localhost:8080/";
 
         services.AddRefitClient<TClient>()
             .ConfigureHttpClient(config => config.BaseAddress = new Uri(baseAddress))

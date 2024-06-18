@@ -4,5 +4,4 @@ namespace GreenMileSharing.IdentityApi.Application.Models;
 
 public sealed class ApplicationUser : IdentityUser
 {
-    
 }

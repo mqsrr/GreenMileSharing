@@ -1,4 +1,5 @@
-﻿using GreenMileSharing.TripApi.Application.Contracts.Requests.Cars;
+﻿using Asp.Versioning;
+using GreenMileSharing.TripApi.Application.Contracts.Requests.Cars;
 using GreenMileSharing.TripApi.Application.Helpers;
 using GreenMileSharing.TripApi.Application.Mappers;
 using GreenMileSharing.TripApi.Application.Options;
@@ -6,8 +7,9 @@ using GreenMileSharing.TripApi.Application.Repositories.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GreenMileSharing.TripApi.Controllers;
+namespace GreenMileSharing.TripApi.Controllers.V2;
 
+[ApiVersion(2.0)]
 [ApiController]
 [Authorize]
 public sealed class CarsController : ControllerBase

@@ -6,5 +6,5 @@ public sealed class Employee
 
     public required string Username { get; init; }
 
-    public IEnumerable<Trip>? Trips { get; init; }
+    public IEnumerable<Trip>? Trips { get; set; }
 }

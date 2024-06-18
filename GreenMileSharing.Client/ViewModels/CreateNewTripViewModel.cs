@@ -62,7 +62,7 @@ internal sealed partial class CreateNewTripViewModel : ViewModelBase
         CreateTripRequest.EmployeeId = StaticStorage.Employee.Id;
         CreateTripRequest.StartMileage = SelectedCar.CurrentMileage;
         
-        var response = await _tripsWebApi.CreateAsync(CreateTripRequest, cancellationToken);
+        var response = await _tripsWebApi.CreateAsync(StaticStorage.ApiVersion, CreateTripRequest, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
             await SukiHost.ShowToast(
