@@ -1,7 +1,7 @@
-using Asp.Versioning;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using GreenMileSharing.Messages;
+using GreenMileSharing.Messages.Json;
 using GreenMileSharing.Shared.Extensions;
 using GreenMileSharing.Shared.Settings;
 using GreenMileSharing.TripApi.Application.Consumers;
@@ -27,7 +27,6 @@ builder.Services.AddSqlServer<TripDbContext>(builder.Configuration["TripsDb:Conn
 
 builder.Services.AddApplicationService<ITripRepository>();
 builder.Services.AddApplicationService<IEmployeeRepository>();
-
 builder.Services.AddApplicationService<ICarRepository>();
 
 builder.Services.AddKeyedScoped<ICarRepository, JsonCarRepository>(nameof(JsonCarRepository));
@@ -40,20 +39,7 @@ builder.Services.AddFluentValidationAutoValidation()
 builder.Services.AddOptionsWithValidateOnStart<RabbitMqSettings>()
     .Bind(builder.Configuration.GetRequiredSection(RabbitMqSettings.SectionName));
 
-builder.Services
-    .AddApiVersioning(options =>
-    {
-        options.ReportApiVersions = true;
-        options.DefaultApiVersion = new ApiVersion(2.0);
-        options.ApiVersionReader = new UrlSegmentApiVersionReader();
-    })
-    .AddMvc()
-    .AddApiExplorer(options =>
-    {
-        options.GroupNameFormat = "'v'V";
-        options.SubstituteApiVersionInUrl = true;
-    });
-
+builder.Services.AddUrlApiVersioning();
 builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.SetKebabCaseEndpointNameFormatter();
@@ -76,6 +62,8 @@ builder.Services.AddMassTransit(busConfigurator =>
         
         EndpointConvention.Map<DeleteEmployee>(new Uri("queue:delete-employee"));
         EndpointConvention.Map<UpdateUsername>(new Uri("queue:update-username"));
+        
+        EndpointConvention.Map<DeleteEmployeeJson>(new Uri("queue:delete-employee-json"));
     }); 
 });
 

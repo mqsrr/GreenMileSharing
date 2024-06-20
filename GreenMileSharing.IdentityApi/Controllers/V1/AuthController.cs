@@ -3,6 +3,7 @@ using GreenMileSharing.IdentityApi.Application.Contracts.Requests;
 using GreenMileSharing.IdentityApi.Application.Helpers;
 using GreenMileSharing.IdentityApi.Application.Mappers;
 using GreenMileSharing.IdentityApi.Application.Models;
+using GreenMileSharing.IdentityApi.Application.Services;
 using GreenMileSharing.IdentityApi.Application.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ public sealed class AuthController : ControllerBase
 {
     private readonly IAuthService<ApplicationUser> _authService;
 
-    public AuthController([FromKeyedServices("JsonAuthService")]IAuthService<ApplicationUser> authService)
+    public AuthController([FromKeyedServices(nameof(JsonAuthService))]IAuthService<ApplicationUser> authService)
     {
         _authService = authService;
     }

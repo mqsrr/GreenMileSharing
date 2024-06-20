@@ -1,12 +1,21 @@
 ﻿using GreenMileSharing.Domain;
+using GreenMileSharing.Messages.Json;
 using GreenMileSharing.TripApi.Application.Helpers;
 using GreenMileSharing.TripApi.Application.Repositories.Abstractions;
+using MassTransit;
 using Newtonsoft.Json;
 
 namespace GreenMileSharing.TripApi.Application.Repositories;
 
 internal sealed class JsonEmployeeRepository : IEmployeeRepository
 {
+    private readonly ISendEndpointProvider _sendEndpointProvider;
+    
+    public JsonEmployeeRepository(ISendEndpointProvider sendEndpointProvider)
+    {
+        _sendEndpointProvider = sendEndpointProvider;
+    }
+
     public async Task<IEnumerable<Employee>> GetAllAsync(CancellationToken cancellationToken)
     {
         if (!File.Exists(FileStorageNames.Employees))
@@ -72,6 +81,11 @@ internal sealed class JsonEmployeeRepository : IEmployeeRepository
         {
             car.Trips = car.Trips?.Where(trip => trip.EmployeeId != id).ToList();
         }
+
+        await _sendEndpointProvider.Send<DeleteEmployeeJson>(new
+        {
+            Id = id
+        }, cancellationToken);
         
         await File.WriteAllTextAsync(FileStorageNames.Cars, JsonConvert.SerializeObject(cars), cancellationToken);
         await File.WriteAllTextAsync(FileStorageNames.Employees, JsonConvert.SerializeObject(employees), cancellationToken);

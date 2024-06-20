@@ -1,8 +1,6 @@
-using Asp.Versioning;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using GreenMileSharing.IdentityApi.Application.Consumers;
-using GreenMileSharing.IdentityApi.Application.Consumers.Json;
 using GreenMileSharing.IdentityApi.Application.Extensions;
 using GreenMileSharing.IdentityApi.Application.Models;
 using GreenMileSharing.IdentityApi.Application.Services;
@@ -42,28 +40,11 @@ builder.Services.AddOptionsWithValidateOnStart<RabbitMqSettings>()
 builder.Services.AddFluentValidationAutoValidation()
     .AddValidatorsFromAssemblyContaining<LoginRequestValidator>(ServiceLifetime.Singleton, includeInternalTypes: true);
 
-builder.Services
-    .AddApiVersioning(options =>
-    {
-        options.ReportApiVersions = true;
-        options.DefaultApiVersion = new ApiVersion(2.0);
-        options.ApiVersionReader = new UrlSegmentApiVersionReader();
-    })
-    .AddMvc()
-    .AddApiExplorer(options =>
-    {
-        options.GroupNameFormat = "'v'V";
-        options.SubstituteApiVersionInUrl = true;
-    });
-
+builder.Services.AddUrlApiVersioning();
 builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.SetKebabCaseEndpointNameFormatter();
-    
-    busConfigurator.AddConsumer<DeleteEmployeeConsumer>();
-    busConfigurator.AddConsumer<UpdateUsernameConsumer>();
-    busConfigurator.AddConsumer<UpdateUsernameJsonConsumer>();
-    busConfigurator.AddConsumer<UpdateUsernameJsonConsumer>();
+    busConfigurator.AddConsumersFromNamespaceContaining<DeleteEmployeeConsumer>();
     
     busConfigurator.UsingRabbitMq((context, configurator) =>
     {

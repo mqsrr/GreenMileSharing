@@ -75,6 +75,7 @@ internal sealed partial class CreateCarViewModel : ViewModelBase
     [RelayCommand]
     private async Task CreateCarAsync(CancellationToken cancellationToken)
     {
+        CarImage = null!;
         var response = await _carsWebApi.CreateAsync(
             StaticStorage.ApiVersion,
             Request.Image,
@@ -85,7 +86,7 @@ internal sealed partial class CreateCarViewModel : ViewModelBase
             Convert.ToInt32(Request.MaintenanceInterval),
             Convert.ToInt32(Request.CurrentMileage)
         );
-
+        
         if (!response.IsSuccessStatusCode)
         {
             Console.WriteLine(response.Error.Content);

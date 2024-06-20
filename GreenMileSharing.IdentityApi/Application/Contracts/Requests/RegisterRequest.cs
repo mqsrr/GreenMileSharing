@@ -8,5 +8,5 @@ public sealed class RegisterRequest
 
     public required string Password { get; init; }
 
-    public required string Role { get; init; } = "User";
+    public string Role { get; init; } = "User";
 }

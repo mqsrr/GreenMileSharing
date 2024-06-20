@@ -3,6 +3,7 @@ using GreenMileSharing.TripApi.Application.Contracts.Requests.Cars;
 using GreenMileSharing.TripApi.Application.Helpers;
 using GreenMileSharing.TripApi.Application.Mappers;
 using GreenMileSharing.TripApi.Application.Options;
+using GreenMileSharing.TripApi.Application.Repositories;
 using GreenMileSharing.TripApi.Application.Repositories.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ public sealed class CarsController : ControllerBase
 {
     private readonly ICarRepository _carRepository;
 
-    public CarsController([FromKeyedServices("JsonCarRepository")]ICarRepository carRepository)
+    public CarsController([FromKeyedServices(nameof(JsonCarRepository))]ICarRepository carRepository)
     {
         _carRepository = carRepository;
     }
