@@ -1,9 +1,9 @@
 {
   "Routes": [
     {
-      "UpstreamPathTemplate": "/auth/login",
+      "UpstreamPathTemplate": "/v{apiVersion}/auth/login",
       "UpstreamHttpMethod": ["POST"],
-      "DownstreamPathTemplate": "/api/auth/login",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/auth/login",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -13,9 +13,9 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/auth/register",
+      "UpstreamPathTemplate": "/v{apiVersion}/auth/register",
       "UpstreamHttpMethod": ["POST"],
-      "DownstreamPathTemplate": "/api/auth/register",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/auth/register",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -25,9 +25,9 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/employees",
+      "UpstreamPathTemplate": "/v{apiVersion}/employees",
       "UpstreamHttpMethod": ["GET", "POST"],
-      "DownstreamPathTemplate": "/api/employees",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/employees",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -46,9 +46,9 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/employees/{username}",
+      "UpstreamPathTemplate": "/v{apiVersion}/employees/{username}",
       "UpstreamHttpMethod": ["GET"],
-      "DownstreamPathTemplate": "/api/employees/{username}",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/employees/{username}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -67,9 +67,9 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/employees/{id:guid}",
+      "UpstreamPathTemplate": "/v{apiVersion}/employees/{id:guid}",
       "UpstreamHttpMethod": ["GET", "PUT", "DELETE"],
-      "DownstreamPathTemplate": "/api/employees/{id:guid}",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/employees/{id:guid}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -88,9 +88,9 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/cars",
+      "UpstreamPathTemplate": "/v{apiVersion}/cars",
       "UpstreamHttpMethod": ["GET", "POST"],
-      "DownstreamPathTemplate": "/api/cars",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/cars",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -109,9 +109,9 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/cars/{id:guid}",
+      "UpstreamPathTemplate": "/v{apiVersion}/cars/{id:guid}",
       "UpstreamHttpMethod": ["PUT", "DELETE"],
-      "DownstreamPathTemplate": "/api/cars/{id:guid}",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/cars/{id:guid}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -130,9 +130,9 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/trips",
+      "UpstreamPathTemplate": "/v{apiVersion}/trips",
       "UpstreamHttpMethod": ["POST"],
-      "DownstreamPathTemplate": "/api/trips",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/trips",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -151,9 +151,9 @@
       }
     },
     {
-      "UpstreamPathTemplate": "/trips/{id:guid}",
+      "UpstreamPathTemplate": "/v{apiVersion}/trips/{id:guid}",
       "UpstreamHttpMethod": ["DELETE"],
-      "DownstreamPathTemplate": "/api/trips/{id:guid}",
+      "DownstreamPathTemplate": "/api/v{apiVersion}/trips/{id:guid}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

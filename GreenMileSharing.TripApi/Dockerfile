@@ -7,17 +7,20 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["GreenMileSharing.API/GreenMileSharing.API.csproj", "GreenMileSharing.API/"]
-RUN dotnet restore "GreenMileSharing.API/GreenMileSharing.API.csproj"
+COPY ["GreenMileSharing.TripApi/GreenMileSharing.TripApi.csproj", "GreenMileSharing.TripApi/"]
+COPY ["GreenMileSharing.Domain/GreenMileSharing.Domain.csproj", "GreenMileSharing.Domain/"]
+COPY ["GreenMileSharing.Messages/GreenMileSharing.Messages.csproj", "GreenMileSharing.Messages/"]
+COPY ["GreenMileSharing.Shared/GreenMileSharing.Shared.csproj", "GreenMileSharing.Shared/"]
+RUN dotnet restore "GreenMileSharing.TripApi/GreenMileSharing.TripApi.csproj"
 COPY . .
-WORKDIR "/src/GreenMileSharing.API"
-RUN dotnet build "GreenMileSharing.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/GreenMileSharing.TripApi"
+RUN dotnet build "GreenMileSharing.TripApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "GreenMileSharing.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "GreenMileSharing.TripApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GreenMileSharing.API.dll"]
+ENTRYPOINT ["dotnet", "GreenMileSharing.TripApi.dll"]

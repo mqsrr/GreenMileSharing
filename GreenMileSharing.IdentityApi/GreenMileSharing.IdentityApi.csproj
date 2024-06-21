@@ -8,12 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\GreenMileSharing.Messages\GreenMileSharing.Messages.csproj" />
       <ProjectReference Include="..\GreenMileSharing.Shared\GreenMileSharing.Shared.csproj" />
     </ItemGroup>
@@ -29,6 +23,12 @@
 
     <ItemGroup>
       <Folder Include="Persistence\Migrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

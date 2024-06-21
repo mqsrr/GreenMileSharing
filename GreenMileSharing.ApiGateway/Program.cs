@@ -8,7 +8,7 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
-    .AddIniFile("config/env.ini", false, true)
+    .AddIniFile("env.ini", false, true)
     .AddJsonFile("ocelot.json", false, true)
     .AddJwtBearer(builder);
 

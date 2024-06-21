@@ -17,7 +17,6 @@ internal sealed class TokenWriter : ITokenWriter<ApplicationUser>
 
     public TokenWriter(IOptions<JwtSettings> jwtSettings, IUserClaimsPrincipalFactory<ApplicationUser> principalFactory)
     {
-
         _principalFactory = principalFactory;
         _jwtSettings = jwtSettings.Value;
     }

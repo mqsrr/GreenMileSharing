@@ -67,7 +67,7 @@ internal partial class RegisterViewModel : ViewModelBase
         }
 
         StaticStorage.Employee = employeeResponse.Content!;
-        StaticStorage.Cars = carsResponse.Content!.ToList();
+        StaticStorage.Cars = carsResponse.Content!.OrderBy(car => car.CarBrand).ToList();
         
         LoginViewModel.MoveToMainDashBoard();
     }

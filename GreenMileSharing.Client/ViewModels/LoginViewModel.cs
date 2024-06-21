@@ -70,7 +70,7 @@ internal partial class LoginViewModel : ViewModelBase
         }
 
         StaticStorage.Employee = loggedInEmployeeResponse.Content!;
-        StaticStorage.Cars = carsResponse.Content!.ToList();
+        StaticStorage.Cars = carsResponse.Content!.OrderBy(car => car.CarBrand).ToList();
         
         MoveToMainDashBoard();
     }

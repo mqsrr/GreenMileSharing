@@ -15,7 +15,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddIniFile("config/env.ini", false, true);
+builder.Configuration.AddIniFile("env.ini", false, true);
 
 builder.Host.UseSerilog((_, configuration) =>
     configuration.ReadFrom.Configuration(builder.Configuration));

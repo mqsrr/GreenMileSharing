@@ -39,7 +39,7 @@ internal sealed class JsonTripRepository : ITripRepository
         employees.Add(employee);
         
         cars.Remove(carToUpdate);
-        carToUpdate.EndOfLifeMileage = trip.EndMileage;
+        carToUpdate.CurrentMileage = trip.EndMileage;
         carToUpdate.Trips = carToUpdate.Trips?.Append(trip) ?? [trip];
         cars.Add(carToUpdate);
         

@@ -1,26 +1,33 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: api-gateway
   labels:
-    role: api-gateway
+    app: api-gateway
 spec:
-  containers:
-    - name: api-gateway
-      image: mqsr/greenmile-api-gateway:1.0.0
-      imagePullPolicy: Always
-      ports:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      name: api-gateway
+      labels:
+        app: api-gateway
+    spec:
+      containers:
         - name: api-gateway
-          containerPort: 8080
-          hostPort: 8080
-          protocol: TCP
-      volumeMounts:
-        - name: config-volume
-          mountPath: /app/config/env.ini
-          subPath: env.ini
+          image: mqsr/greenmile-api-gateway:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config/env.ini
+              subPath: env.ini
       restartPolicy: Always
-  volumes:
-    - name: config-volume
-      configMap:
-        name: appsettings-configmap
-  
+      volumes:
+        - name: config-volume
+          configMap:
+            name: appsettings-configmap
+      

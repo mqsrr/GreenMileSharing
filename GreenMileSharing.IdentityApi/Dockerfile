@@ -8,6 +8,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["GreenMileSharing.IdentityApi/GreenMileSharing.IdentityApi.csproj", "GreenMileSharing.IdentityApi/"]
+COPY ["GreenMileSharing.Messages/GreenMileSharing.Messages.csproj", "GreenMileSharing.Messages/"]
+COPY ["GreenMileSharing.Shared/GreenMileSharing.Shared.csproj", "GreenMileSharing.Shared/"]
 RUN dotnet restore "GreenMileSharing.IdentityApi/GreenMileSharing.IdentityApi.csproj"
 COPY . .
 WORKDIR "/src/GreenMileSharing.IdentityApi"
