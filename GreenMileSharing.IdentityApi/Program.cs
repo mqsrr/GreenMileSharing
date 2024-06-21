@@ -1,6 +1,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using GreenMileSharing.IdentityApi.Application.Consumers;
+using GreenMileSharing.IdentityApi.Application.Consumers.Json;
 using GreenMileSharing.IdentityApi.Application.Extensions;
 using GreenMileSharing.IdentityApi.Application.Models;
 using GreenMileSharing.IdentityApi.Application.Services;
@@ -17,7 +18,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddIniFile("env.ini");
+builder.Configuration.AddIniFile("config/env.ini", false, true);
 builder.Host.UseSerilog((_, configuration) =>
     configuration.ReadFrom.Configuration(builder.Configuration));
 
@@ -44,7 +45,11 @@ builder.Services.AddUrlApiVersioning();
 builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.SetKebabCaseEndpointNameFormatter();
-    busConfigurator.AddConsumersFromNamespaceContaining<DeleteEmployeeConsumer>();
+    busConfigurator.AddConsumer<DeleteEmployeeConsumer>();
+    busConfigurator.AddConsumer<UpdateUsernameConsumer>();
+    
+    busConfigurator.AddConsumer<DeleteEmployeeJsonConsumer>();
+    busConfigurator.AddConsumer<UpdateUsernameJsonConsumer>();
     
     busConfigurator.UsingRabbitMq((context, configurator) =>
     {
